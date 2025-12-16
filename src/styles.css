@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+
+@import '@fontsource-variable/fira-code';
+
+@theme inline {
+  --color-light: #FAF8F5;
+  --font-sans: 'Fira Code Variable', sans-serif;
+  --font-mono: 'Fira Code Variable', monospace;
+}
+
+body {
+  @apply m-0 bg-light;
+  font-family: 'Fira Code Variable', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
