@@ -1,10 +1,9 @@
 @import 'tailwindcss';
 
-
 @import '@fontsource-variable/fira-code';
 
 @theme inline {
-  --color-light: #FAF8F5;
+  --color-light: #faf8f5;
   --font-sans: 'Fira Code Variable', sans-serif;
   --font-mono: 'Fira Code Variable', monospace;
 }

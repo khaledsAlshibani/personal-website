@@ -31,6 +31,13 @@
     "paths": {
       "@/*": ["./src/*"],
       "@features/*": ["./src/features/*"]
-    }
+    },
+
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./schema.graphql"
+      }
+    ]
   }
 }

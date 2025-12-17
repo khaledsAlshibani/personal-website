@@ -1,4 +1,6 @@
 import Terminal from '@/components/icons/Terminal'
+import Title from '@/components/typography/Title'
+import Text from '@/components/typography/Text'
 import { Route } from '@/routes/__root'
 import { Image } from '@unpic/react'
 
@@ -11,8 +13,8 @@ export default function Header() {
         <Image
           src={headerData.img.src}
           alt={headerData.img.alt}
-          width={headerData.img.width ?? 100}
-          height={headerData.img.height ?? 100}
+          width={headerData.img.width || 100}
+          height={headerData.img.height || 100}
           className="rounded-sm mb-4"
         />
       )}
@@ -21,16 +23,20 @@ export default function Header() {
           {headerData.titlePrefix && (
             <>
               <Terminal className="size-5 text-gray-700 inline-block mr-2 -mt-1" />
-              <span className="text-2xl text-gray-700 mr-3">{headerData.titlePrefix}</span>
+              <span className="text-2xl text-gray-700 mr-3">
+                {headerData.titlePrefix}
+              </span>
             </>
           )}
-          <h1 className="text-2xl font-semibold inline-block">{headerData.title}</h1>
+          <Title as="h1" className="text-2xl font-semibold inline-block">
+            {headerData.title}
+          </Title>
         </span>
       )}
       {headerData.description && (
-        <p className="leading-relaxed whitespace-pre-line">
+        <Text as="p" keepWhitespace>
           {headerData.description}
-        </p>
+        </Text>
       )}
     </header>
   )

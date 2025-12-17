@@ -1,8 +1,10 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { QueryClientProvider } from '@tanstack/react-query'
 
 import { getHeaderContent } from '@features/header/data/header.data'
+import { queryClient } from '@/utils/queryClient'
 
 import appCss from '@/styles.css?url'
 
@@ -19,7 +21,8 @@ export const Route = createRootRoute({
       },
       {
         title: 'Khaled Alshibani - Full Stack developer',
-        description: 'I am a web developer with a strong front end foundation and solid full stack experience, working on real production web applications. I have experience maintaining existing systems as well as building and extending modern web applications, dealing with real constraints such as performance, stability, and long-term maintainability.',
+        description:
+          'I am a web developer with a strong front end foundation and solid full stack experience, working on real production web applications. I have experience maintaining existing systems as well as building and extending modern web applications, dealing with real constraints such as performance, stability, and long-term maintainability.',
         author: 'Khaled Alshibani',
       },
     ],
@@ -41,18 +44,20 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <TanStackDevtools
+            config={{
+              position: 'bottom-right',
+            }}
+            plugins={[
+              {
+                name: 'Tanstack Router',
+                render: <TanStackRouterDevtoolsPanel />,
+              },
+            ]}
+          />
+        </QueryClientProvider>
         <Scripts />
       </body>
     </html>
