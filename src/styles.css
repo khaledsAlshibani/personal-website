@@ -27,5 +27,5 @@ a {
 }
 
 @utility border-default {
-  @apply border-[var(--color-contrast)]/10;
+  @apply border-[var(--color-contrast)]/5;
 }

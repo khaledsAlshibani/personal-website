@@ -4,9 +4,20 @@ import TnwArticle from './TnwArticle'
 import Title from '@/components/typography/Title'
 
 export default function TnwArticleList() {
-  const { data, isPending, isError, error } = useGetTnwArticlesQuery()
+  const { data, isPending, isError } = useGetTnwArticlesQuery()
 
-  if (isPending) return <ArticleSkeletonLoader />
+  if (isPending) {
+    return (
+      <div className="flex flex-col gap-8 sm:gap-4">
+        <Title as="h2">Latest Blogs</Title>
+        <div className="flex flex-col gap-4 sm:gap-6">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <ArticleSkeletonLoader key={idx} />
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   if (isError || !data) return null
 

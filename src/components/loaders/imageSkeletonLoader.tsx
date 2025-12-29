@@ -1,26 +1,35 @@
-import { SkeletonLoader } from './SkeletonLoader'
 import { useMemo } from 'react'
+import { cn } from '@/utils/cn'
+import { SkeletonLoader } from './SkeletonLoader'
 
 interface ImageSkeletonLoaderProps {
   size: 'small' | 'medium' | 'large'
 }
 
-export default function ImageSkeletonLoader({
-  size,
-}: ImageSkeletonLoaderProps) {
-  const height = useMemo(() => {
+export default function ImageSkeletonLoader({ size }: ImageSkeletonLoaderProps) {
+  const sizeClassName = useMemo(() => {
     switch (size) {
-      case 'small': {
-        return '100px'
-      }
-      case 'medium': {
-        return '200px'
-      }
-      case 'large': {
-        return '300px'
-      }
+      case 'small':
+        return 'w-24 sm:w-28'
+      case 'medium':
+        return 'w-full sm:w-32 lg:w-40'
+      case 'large':
+        return 'w-full sm:w-48 lg:w-56'
     }
   }, [size])
 
-  return <SkeletonLoader width="100%" height={height} />
+  return (
+    <div
+      className={cn(
+        'relative aspect-16/10 rounded overflow-hidden border border-default shrink-0',
+        sizeClassName,
+      )}
+    >
+      <SkeletonLoader
+        width="w-full"
+        height="h-full"
+        className="h-full w-full"
+      />
+    </div>
+  )
 }

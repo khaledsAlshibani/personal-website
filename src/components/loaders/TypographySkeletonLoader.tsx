@@ -4,40 +4,36 @@ import { useMemo } from 'react'
 interface TypographySkeletonLoaderProps {
   kind: 'title' | 'subtitle' | 'description'
   fullWidth?: boolean
+  className?: string
 }
 
 export default function TypographySkeletonLoader({
   kind,
   fullWidth = false,
+  className,
 }: TypographySkeletonLoaderProps) {
   const width = useMemo(() => {
-    if (fullWidth) return '100%'
+    if (fullWidth) return 'w-full'
     switch (kind) {
-      case 'title': {
-        return '300px'
-      }
-      case 'subtitle': {
-        return '200px'
-      }
-      case 'description': {
-        return '150px'
-      }
+      case 'title':
+        return 'w-44'
+      case 'subtitle':
+        return 'w-30'
+      case 'description':
+        return 'w-full'
     }
-  }, [kind])
+  }, [fullWidth, kind])
 
   const height = useMemo(() => {
     switch (kind) {
-      case 'title': {
-        return '20px'
-      }
-      case 'subtitle': {
-        return '15px'
-      }
-      case 'description': {
-        return '20px'
-      }
+      case 'title':
+        return 'h-6'
+      case 'subtitle':
+        return 'h-6'
+      case 'description':
+        return 'h-4'
     }
   }, [kind])
 
-  return <SkeletonLoader width={width} height={height} />
+  return <SkeletonLoader width={width} height={height} className={className} />
 }

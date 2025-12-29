@@ -3,26 +3,24 @@ import React from 'react'
 
 type SkeletonLoaderProps = {
   className?: string
-
-  // tailwind width, height, rounded
-  width?: number | string
-  height?: number | string
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  width?: string
+  height?: string
+  rounded?: string
 }
 
 export function SkeletonLoader({
-  width = '100%',
-  height = '20px',
-  rounded = 'md',
+  width = 'w-full',
+  height = 'h-8',
+  rounded = 'rounded',
   className = '',
 }: SkeletonLoaderProps) {
   return (
     <div
       className={cn(
-        'animate-pulse bg-gray-200',
-        rounded && `rounded-${rounded}`,
-        width && `w-${width}`,
-        height && `h-${height}`,
+        'animate-pulse bg-[var(--color-contrast)]/30',
+        rounded,
+        width,
+        height,
         className,
       )}
       aria-hidden="true"
