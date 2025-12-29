@@ -3,7 +3,7 @@ import { cn } from '@/utils/cn'
 interface TextProps {
   children: React.ReactNode
   className?: string
-  as: 'p' | 'span'
+  as?: 'p' | 'span'
   keepWhitespace?: boolean
   size?: 'sm' | 'default'
 }
@@ -11,7 +11,7 @@ interface TextProps {
 export default function Text({
   children,
   className,
-  as,
+  as = 'p',
   keepWhitespace = false,
   size = 'default',
 }: TextProps) {
