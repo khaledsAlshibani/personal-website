@@ -14,7 +14,7 @@ export default function Title({ children, as, className }: TitleProps) {
         'inline-block',
         as === 'h1' && 'text-4xl font-semibold',
         as === 'h2' && 'text-3xl font-bold',
-        as === 'h3' && 'text-xl font-medium',
+        as === 'h3' && 'text-lg font-bold',
         as === 'h4' && 'text-lg font-medium',
         as === 'h5' && 'text-lg font-normal',
         as === 'h6' && 'text-base font-normal',

@@ -12,9 +12,7 @@ export default function TnwArticleList() {
 
   return (
     <div className="flex flex-col gap-8 sm:gap-4">
-      <Title as="h2" className="text-2xl font-semibold inline-block">
-        Latest Blogs
-      </Title>
+      <Title as="h2">Latest Blogs</Title>
 
       {data.articles.map(
         (article) =>

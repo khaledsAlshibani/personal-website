@@ -1,16 +1,20 @@
 @import 'tailwindcss';
 
-@import '@fontsource-variable/fira-code';
+@import '@fontsource-variable/dm-sans';
 
 @theme inline {
   --color-light: #faf8f5;
-  --font-sans: 'Fira Code Variable', sans-serif;
+  --color-contrast: #756244;
+  --font-sans: 'DM Sans Variable', sans-serif;
   --font-mono: 'Fira Code Variable', monospace;
 }
 
 body {
-  @apply m-0 bg-light;
-  font-family: 'Fira Code Variable', monospace;
+  @apply m-0 bg-light font-sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  @apply no-underline;
 }

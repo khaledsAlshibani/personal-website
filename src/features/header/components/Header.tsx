@@ -3,6 +3,7 @@ import Title from '@/components/typography/Title'
 import Text from '@/components/typography/Text'
 import { Route } from '@/routes/__root'
 import { Image } from '@unpic/react'
+import SocialMediaList from '@/components/icons/socialMedia/socialMediaList'
 
 export default function Header() {
   const headerData = Route.useLoaderData()
@@ -33,6 +34,9 @@ export default function Header() {
           </Title>
         </span>
       )}
+
+      <SocialMediaList />
+
       {headerData.description && (
         <Text as="p" keepWhitespace>
           {headerData.description}

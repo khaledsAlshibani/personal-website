@@ -17,10 +17,10 @@ export default function ProjectsList({ topProjects = [] }: Props) {
 
   return (
     <div className="flex flex-col gap-8 sm:gap-4">
-      <Title as="h2">Projects</Title>
+      <Title as="h2">Projects & Contributions</Title>
 
       <Title as="h3">Featured Projects</Title>
-      {topProjects.length > 0 ? (
+      {topProjects.length > 0 && (
         <div className="grid gap-4">
           {topProjects.map((proj) => (
             <ProjectCard
@@ -31,8 +31,6 @@ export default function ProjectsList({ topProjects = [] }: Props) {
             />
           ))}
         </div>
-      ) : (
-        <Text>No featured projects yet.</Text>
       )}
 
       <Title as="h3">Featured Repositories</Title>

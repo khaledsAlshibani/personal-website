@@ -1,6 +1,5 @@
 import Text from '@/components/typography/Text'
 import Title from '@/components/typography/Title'
-import { Star } from 'lucide-react'
 
 interface ProjectCardProps {
   title: string
@@ -19,7 +18,7 @@ export default function ProjectCard({
       <Title as="h4" className="group-hover:underline">
         {title}
       </Title>
-      <Text>{description}</Text>
+      <Text size="sm">{description}</Text>
       {/* {starsCount && (
         <Text as="span" className="flex gap-1 items-center" size="sm">
           <Star size={16} />

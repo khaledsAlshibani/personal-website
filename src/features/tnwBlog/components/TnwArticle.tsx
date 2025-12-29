@@ -3,6 +3,7 @@ import { formatDate } from '@/utils/date'
 import Title from '@/components/typography/Title'
 import Text from '@/components/typography/Text'
 import { buildTnwBlogSlug } from '@/features/tnwBlog/utils/slug'
+import { Clock } from 'lucide-react'
 
 interface TnwArticleProps {
   title: string
@@ -21,8 +22,8 @@ export default function TnwArticle({
 }: TnwArticleProps) {
   return (
     <a href={buildTnwBlogSlug(slug)} target="_blank" rel="noopener noreferrer">
-      <article className="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center justify-between hover:bg-gray-50/50 p-4 -m-4 rounded-lg transition-colors duration-200">
-        <div className="relative w-full sm:w-44 lg:w-52 aspect-16/10 rounded-lg overflow-hidden border border-gray-200 shrink-0">
+      <article className="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center justify-between">
+        <div className="relative w-full sm:w-32 lg:w-44 aspect-16/10 rounded overflow-hidden border border-contrast/10 shrink-0">
           <Image
             src={imageSrc}
             alt={`Khaled Alshibani - ${imageAlt || title}`}
@@ -35,7 +36,8 @@ export default function TnwArticle({
           <Title as="h3" className="group-hover:underline">
             {title}
           </Title>
-          <Text as="p" size="sm" className="mt-2">
+          <Text as="p" size="sm" className="mt-2 flex items-center gap-1">
+            <Clock size={14} />
             {formatDate(date)}
           </Text>
         </div>
