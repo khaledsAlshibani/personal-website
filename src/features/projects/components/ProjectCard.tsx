@@ -1,10 +1,11 @@
 import Text from '@/components/typography/Text'
 import Title from '@/components/typography/Title'
+import { cn } from '@/utils/cn'
 
 interface ProjectCardProps {
   title: string
   description: string
-  url: string
+  url?: string
   starsCount?: string
 }
 
@@ -13,18 +14,20 @@ export default function ProjectCard({
   description,
   url,
 }: ProjectCardProps) {
+  const Tag = url ? 'a' : 'div'
+
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="group">
-      <Title as="h4" className="group-hover:underline">
+    <Tag
+      href={url}
+      target={url ? '_blank' : undefined}
+      rel={url ? 'noopener noreferrer' : undefined}
+      className={cn(url && 'group')}
+      aria-disabled={!url}
+    >
+      <Title as="h4" className={cn(url && 'group-hover:underline')}>
         {title}
       </Title>
-      <Text size="sm">{description}</Text>
-      {/* {starsCount && (
-        <Text as="span" className="flex gap-1 items-center" size="sm">
-          <Star size={16} />
-          {starsCount}
-        </Text>
-      )} */}
-    </a>
+      <Text size="sm" className='mt-2 opacity-80'>{description}</Text>
+    </Tag>
   )
 }

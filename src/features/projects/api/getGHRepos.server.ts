@@ -12,11 +12,12 @@ const allowedReposByOwner: Record<string, string[]> = {
     'php-nextjs-simple-app'
   ],
   technway: [
-    'rvnjs',
     'graphql-starter',
-    'rest-api-starter'
   ],
   letssummarize: ['*'],
+  'SAHIM-Platform': [
+    'sahim-api'
+  ],
 }
 
 export const getGithubReposServer = createServerFn({ method: 'GET' }).handler(

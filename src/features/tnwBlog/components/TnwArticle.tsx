@@ -23,7 +23,7 @@ export default function TnwArticle({
   return (
     <a href={buildTnwBlogSlug(slug)} target="_blank" rel="noopener noreferrer">
       <article className="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center justify-between">
-        <div className="relative w-full sm:w-32 lg:w-44 aspect-16/10 rounded overflow-hidden border border-contrast/10 shrink-0">
+        <div className="relative w-full sm:w-32 lg:w-40 aspect-16/10 rounded overflow-hidden border border-default shrink-0">
           <Image
             src={imageSrc}
             alt={`Khaled Alshibani - ${imageAlt || title}`}

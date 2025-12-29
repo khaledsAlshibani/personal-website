@@ -4,13 +4,24 @@ import Text from '@/components/typography/Text'
 import { Route } from '@/routes/__root'
 import { Image } from '@unpic/react'
 import SocialMediaList from '@/components/icons/socialMedia/socialMediaList'
+import { useState } from 'react'
 
 export default function Header() {
   const headerData = Route.useLoaderData()
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const { description, title, img } = headerData
+
+  const maxDescriptionLength = 1090
+  const hasOverflow = description.length > maxDescriptionLength
+  const previewText =
+    isExpanded || !hasOverflow
+      ? description
+      : `${description.slice(0, maxDescriptionLength)}…`
 
   return (
     <header className="flex flex-col gap-8">
-      {headerData.img.src && (
+      {img.src && (
         <Image
           src={headerData.img.src}
           alt={headerData.img.alt}
@@ -19,12 +30,12 @@ export default function Header() {
           className="rounded-sm mb-4"
         />
       )}
-      {headerData.title && (
+      {title && (
         <span>
           {headerData.titlePrefix && (
             <>
-              <Terminal className="size-5 text-gray-700 inline-block mr-2 -mt-1" />
-              <span className="text-2xl text-gray-700 mr-3">
+              <Terminal className="size-5 opacity-75 inline-block mr-2 -mt-1" />
+              <span className="text-2xl opacity-75 mr-2">
                 {headerData.titlePrefix}
               </span>
             </>
@@ -37,10 +48,23 @@ export default function Header() {
 
       <SocialMediaList />
 
-      {headerData.description && (
-        <Text as="p" keepWhitespace>
-          {headerData.description}
-        </Text>
+      {description && (
+        <div className="relative">
+          <Text as="p" keepWhitespace>
+            {previewText}
+          </Text>
+
+          {hasOverflow && (
+            <button
+              type="button"
+              className="mt-3 inline-flex items-center gap-2 font-semibold underline text-[var(--color-contrast)] cursor-pointer"
+              onClick={() => setIsExpanded((prev) => !prev)}
+              aria-expanded={isExpanded}
+            >
+              {isExpanded ? 'Show less' : 'Read more'}
+            </button>
+          )}
+        </div>
       )}
     </header>
   )

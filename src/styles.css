@@ -3,18 +3,29 @@
 @import '@fontsource-variable/dm-sans';
 
 @theme inline {
-  --color-light: #faf8f5;
+  --color-body: #faf8f5;
   --color-contrast: #756244;
   --font-sans: 'DM Sans Variable', sans-serif;
   --font-mono: 'Fira Code Variable', monospace;
 }
 
+:root[data-theme='dark'] {
+  --color-body: #222 !important;
+  --color-contrast: #eee !important;
+}
+
 body {
-  @apply m-0 bg-light font-sans;
+  @apply m-0 font-sans;
+  background-color: var(--color-body);
+  /* color: var(--color-contrast); */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   @apply no-underline;
+}
+
+@utility border-default {
+  @apply border-[var(--color-contrast)]/10;
 }

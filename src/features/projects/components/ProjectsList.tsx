@@ -16,9 +16,10 @@ export default function ProjectsList({ topProjects = [] }: Props) {
   if (isError || !repos) return null
 
   return (
-    <div className="flex flex-col gap-8 sm:gap-4">
+    <div className="flex flex-col sm:gap-8">
       <Title as="h2">Projects & Contributions</Title>
 
+      <div>
       <Title as="h3">Featured Projects</Title>
       {topProjects.length > 0 && (
         <div className="grid gap-4">
@@ -27,13 +28,14 @@ export default function ProjectsList({ topProjects = [] }: Props) {
               key={proj.id}
               title={proj.title}
               description={proj.description}
-              url="#"
             />
           ))}
         </div>
       )}
+      </div>
 
-      <Title as="h3">Featured Repositories</Title>
+    <div className="flex flex-col sm:gap-6">
+      <Title as="h3" className="border-t border-default pt-8 sm:pt-8">Featured Repositories</Title>
 
       {repos.map((repo) => {
         const title =
@@ -51,6 +53,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
           />
         )
       })}
+      </div>
     </div>
   )
 }
