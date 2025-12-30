@@ -3,11 +3,14 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from 'next-themes'
+import { useTranslation } from 'react-i18next'
 
 import { getHeaderContent } from '@features/header/data/header.data'
 import { queryClient } from '@/utils/queryClient'
 
 import appCss from '@/styles.css?url'
+
+import '@/i18n';
 
 export const Route = createRootRoute({
   loader: async () => await getHeaderContent(),
@@ -39,8 +42,11 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { i18n } = useTranslation()
+  const lang = (i18n.language || 'en').slice(0, 2)
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
