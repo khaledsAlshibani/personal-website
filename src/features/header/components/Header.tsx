@@ -5,6 +5,7 @@ import Title from '@/components/typography/Title'
 import Text from '@/components/typography/Text'
 import { Route } from '@/routes/__root'
 import SocialMediaList from '@/components/icons/socialMedia/socialMediaList'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 export default function Header() {
   const headerData = Route.useLoaderData()
@@ -12,15 +13,17 @@ export default function Header() {
 
   const { description, title, img } = headerData
 
-  const maxDescriptionLength = 1090
+  const maxDescriptionLength = 700
   const hasOverflow = description.length > maxDescriptionLength
   const previewText =
     isExpanded || !hasOverflow
       ? description
       : `${description.slice(0, maxDescriptionLength)}…`
 
+  const ArrowIconTag = isExpanded ? ChevronUp : ChevronDown
+
   return (
-    <header className="flex flex-col gap-8">
+    <header id="about" className="flex flex-col gap-8">
       {img.src && (
         <Image
           src={headerData.img.src}
@@ -57,11 +60,12 @@ export default function Header() {
           {hasOverflow && (
             <button
               type="button"
-              className="mt-3 inline-flex items-center gap-2 font-semibold underline text-[var(--color-contrast)] cursor-pointer"
+              className="mt-6 inline-flex items-center gap-2 font-semibold underline text-[var(--color-contrast)] cursor-pointer"
               onClick={() => setIsExpanded((prev) => !prev)}
               aria-expanded={isExpanded}
             >
               {isExpanded ? 'Show less' : 'Read more'}
+              <ArrowIconTag size={18} />
             </button>
           )}
         </div>

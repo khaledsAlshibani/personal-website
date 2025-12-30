@@ -21,13 +21,13 @@ export default function ProjectCard({
       href={url}
       target={url ? '_blank' : undefined}
       rel={url ? 'noopener noreferrer' : undefined}
-      className={cn(url && 'group')}
+      className={cn(url && 'group', 'ps-4 sm:ps-6')}
       aria-disabled={!url}
     >
       <Title as="h4" className={cn(url && 'group-hover:underline')}>
         {title}
       </Title>
-      <Text size="sm" className='mt-2 opacity-80'>{description}</Text>
+      <Text size="sm" className='mt-1 opacity-80'>{description}</Text>
     </Tag>
   )
 }

@@ -16,7 +16,7 @@ export function SkeletonLoader({
   return (
     <div
       className={cn(
-        'animate-pulse bg-[var(--color-contrast)]/30',
+        'animate-pulse bg-[var(--color-contrast)]/20',
         rounded,
         width,
         height,

@@ -22,7 +22,7 @@ export default function TnwArticleList() {
   if (isError || data.articles.length === 0) return null
 
   return (
-    <div className="flex flex-col gap-8 sm:gap-4">
+    <div id='blog' className="flex flex-col gap-8 sm:gap-4">
       <Title as="h2">Latest Blogs</Title>
 
       {data.articles.map(

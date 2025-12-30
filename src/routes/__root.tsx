@@ -46,7 +46,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   const lang = (i18n.language || 'en').slice(0, 2)
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} className='scroll-smooth' suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

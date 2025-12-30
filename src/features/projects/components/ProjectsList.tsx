@@ -12,7 +12,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
 
   if (isPending) {
     return (
-      <div className="flex flex-col sm:gap-8">
+      <div className="flex flex-col gap-8">
         <Title as="h2">Projects & Contributions</Title>
 
         <div>
@@ -26,7 +26,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
           </div>
         </div>
 
-        <div className="flex flex-col sm:gap-6">
+        <div className="flex flex-col gap-6">
           <Title as="h3" className="border-t border-default pt-8 sm:pt-8">
             Featured Repositories
           </Title>
@@ -43,13 +43,13 @@ export default function ProjectsList({ topProjects = [] }: Props) {
   if (isError || repos.length === 0) return null
 
   return (
-    <div className="flex flex-col sm:gap-8">
+    <div id='projects' className="flex flex-col gap-8">
       <Title as="h2">Projects & Contributions</Title>
 
-      <div>
+      <div className="flex flex-col gap-6">
         <Title as="h3">Featured Projects</Title>
         {topProjects.length > 0 && (
-          <div className="grid gap-4">
+          <>
             {topProjects.map((proj) => (
               <ProjectCard
                 key={proj.id}
@@ -57,12 +57,12 @@ export default function ProjectsList({ topProjects = [] }: Props) {
                 description={proj.description}
               />
             ))}
-          </div>
+          </>
         )}
       </div>
 
-      <div className="flex flex-col sm:gap-6">
-        <Title as="h3" className="border-t border-default pt-8 sm:pt-8">
+      <div className="flex flex-col gap-6">
+        <Title as="h3" className="border-t border-default pt-8">
           Featured Repositories
         </Title>
 

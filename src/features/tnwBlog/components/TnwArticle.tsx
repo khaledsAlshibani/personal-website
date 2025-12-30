@@ -36,8 +36,8 @@ export default function TnwArticle({
           <Title as="h3" className="group-hover:underline">
             {title}
           </Title>
-          <Text as="p" size="sm" className="mt-2 flex items-center gap-1">
-            <Clock size={14} />
+          <Text as="p" className="mt-2 flex items-center gap-1 text-xs">
+            <Clock size={12} />
             {formatDate(date)}
           </Text>
         </div>

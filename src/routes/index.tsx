@@ -15,7 +15,7 @@ function App() {
   const topProjects = Route.useLoaderData()
 
   return (
-    <main className="min-h-screen w-full max-w-3xl mx-auto px-8 flex flex-col gap-20">
+    <main className="min-h-screen w-full max-w-3xl mx-auto px-6 flex flex-col gap-20">
       <Navbar />
       <Header />
       <TnwArticleList />
