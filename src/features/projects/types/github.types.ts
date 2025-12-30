@@ -7,6 +7,6 @@ export interface GithubRepo {
   stargazers_count: number
   forks_count: number
   language: string | null
-  topics?: string[]
+  topics?: Array<string>
   owner?: { login: string }
 }

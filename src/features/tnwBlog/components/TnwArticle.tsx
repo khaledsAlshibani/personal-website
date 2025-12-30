@@ -1,9 +1,9 @@
 import { Image } from '@unpic/react'
+import { Clock } from 'lucide-react'
 import { formatDate } from '@/utils/date'
 import Title from '@/components/typography/Title'
 import Text from '@/components/typography/Text'
 import { buildTnwBlogSlug } from '@/features/tnwBlog/utils/slug'
-import { Clock } from 'lucide-react'
 
 interface TnwArticleProps {
   title: string

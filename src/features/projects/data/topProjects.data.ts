@@ -9,7 +9,7 @@ type TopProject = {
 export const getTopProjects = createServerFn({
   method: 'GET',
 }).handler(
-  async (): Promise<TopProject[]> => [
+  (): Array<TopProject> => [
     {
       id: 1,
       title: 'Technway Component Library',

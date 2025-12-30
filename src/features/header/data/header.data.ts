@@ -1,10 +1,10 @@
 import { createServerFn } from '@tanstack/react-start'
-import { HeaderContent } from '@features/header/types/header.types'
+import type { HeaderContent } from '@features/header/types/header.types'
 
 export const getHeaderContent = createServerFn({
   method: 'GET',
 }).handler(
-  async (): Promise<HeaderContent> => ({
+  (): HeaderContent => ({
     id: 1,
     titlePrefix: "I'm",
     title: 'Khaled Alshibani',

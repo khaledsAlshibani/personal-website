@@ -21,13 +21,13 @@ export async function fetchPage<T = any>(
   url: string,
   headers: Record<string, string>,
   timeoutMs: number = DEFAULT_GH_TIMEOUT_MS,
-): Promise<T[]> {
+): Promise<Array<T>> {
   const res = await fetchWithTimeout(url, { headers }, timeoutMs)
   if (!res.ok) {
     throw new Error(`GitHub API request failed (${res.status}) for ${url}`)
   }
 
-  return (await res.json()) as T[]
+  return (await res.json()) as Array<T>
 }
 
 export function getGHApiBaseUrl(): string {

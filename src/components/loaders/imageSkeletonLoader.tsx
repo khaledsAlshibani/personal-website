@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { cn } from '@/utils/cn'
 import { SkeletonLoader } from './SkeletonLoader'
+import { cn } from '@/utils/cn'
 
 interface ImageSkeletonLoaderProps {
   size: 'small' | 'medium' | 'large'

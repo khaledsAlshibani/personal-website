@@ -1,6 +1,6 @@
+import LangSwitcher from './LangSwitcher'
 import NavbarMenu from '@/components/nav/NavbarMenu'
 import ThemeSwitcher from '@/components/nav/ThemeSwitcher'
-import LangSwitcher from './LangSwitcher'
 
 export default function Navbar() {
   return (

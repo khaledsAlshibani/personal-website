@@ -1,17 +1,17 @@
+import type { IconProps } from '@/components/icons/types/icon.types'
+import type { ReactElement } from 'react'
 import Facebook from '@/components/icons/socialMedia/Facebook'
 import Github from '@/components/icons/socialMedia/Github'
 import Linkedin from '@/components/icons/socialMedia/Linkedin'
 import { XPlatform } from '@/components/icons/socialMedia/XPlatform'
-import type { IconProps } from '@/components/icons/types/icon.types'
 import { cn } from '@/utils/cn'
-import type { ReactElement } from 'react'
 
 interface SocialMediaItem {
   name: SocialMediaIcon
   url: string
 }
 interface SocialMediaListProps {
-  items?: SocialMediaItem[]
+  items?: Array<SocialMediaItem>
   className?: string
   iconClassName?: string
   iconSize?: number
@@ -36,7 +36,7 @@ const iconComponents: Record<
   x: XPlatform,
 }
 
-const defaultItems: SocialMediaItem[] = [
+const defaultItems: Array<SocialMediaItem> = [
   { name: 'github', url: 'https://github.com/khaledsAlshibani' },
   { name: 'linkedin', url: 'https://www.linkedin.com/in/khaledsalshibani/' },
   { name: 'x', url: 'https://x.com/khaleds_saif' },
@@ -54,8 +54,6 @@ export default function SocialMediaList({
       {items.map(({ name, url }) => {
         const Icon = iconComponents[name]
         const label = socialMediaIcons[name].replace(/([A-Z])([A-Z])/g, '$1 $2')
-
-        if (!Icon) return null
 
         return (
           <li key={url}>

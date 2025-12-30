@@ -1,4 +1,4 @@
-import { IconProps } from '@/components/icons/types/icon.types'
+import type { IconProps } from '@/components/icons/types/icon.types'
 
 export default function Facebook({ className, size }: IconProps) {
   return (

@@ -1,6 +1,6 @@
 import { useGetTnwArticlesQuery } from '@features/tnwBlog/api/useGetBlogArticles.query'
-import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'
 import TnwArticle from './TnwArticle'
+import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'
 import Title from '@/components/typography/Title'
 
 export default function TnwArticleList() {
@@ -19,7 +19,7 @@ export default function TnwArticleList() {
     )
   }
 
-  if (isError || !data) return null
+  if (isError || data.articles.length === 0) return null
 
   return (
     <div className="flex flex-col gap-8 sm:gap-4">

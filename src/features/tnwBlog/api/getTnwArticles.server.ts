@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
-import { graphql } from '@/graphql'
-import type { GetArticlesQuery } from '@/graphql/graphql'
 import request from 'graphql-request'
+import type { GetArticlesQuery } from '@/graphql/graphql'
+import { graphql } from '@/graphql'
 import {
   getTnwBlogApiPublicUrl,
   getTnwBlogApiToken,

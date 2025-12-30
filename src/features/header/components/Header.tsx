@@ -1,10 +1,10 @@
+import { Image } from '@unpic/react'
+import { useState } from 'react'
 import Terminal from '@/components/icons/Terminal'
 import Title from '@/components/typography/Title'
 import Text from '@/components/typography/Text'
 import { Route } from '@/routes/__root'
-import { Image } from '@unpic/react'
 import SocialMediaList from '@/components/icons/socialMedia/socialMediaList'
-import { useState } from 'react'
 
 export default function Header() {
   const headerData = Route.useLoaderData()

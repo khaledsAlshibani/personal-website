@@ -4,7 +4,7 @@ import ProjectSkeletonLoader from '@features/projects/components/ProjectSkeleton
 import Title from '@/components/typography/Title'
 
 type Props = {
-  topProjects?: { id: number; title: string; description: string }[]
+  topProjects?: Array<{ id: number; title: string; description: string }>
 }
 
 export default function ProjectsList({ topProjects = [] }: Props) {
@@ -40,7 +40,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
     )
   }
 
-  if (isError || !repos) return null
+  if (isError || repos.length === 0) return null
 
   return (
     <div className="flex flex-col sm:gap-8">
@@ -78,7 +78,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
               title={title}
               description={repo.description || ''}
               url={repo.homepage || repo.html_url}
-              starsCount={repo.stargazers_count?.toString()}
+              starsCount={repo.stargazers_count.toString()}
             />
           )
         })}

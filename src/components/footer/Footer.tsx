@@ -1,5 +1,5 @@
-import Text from '@/components/typography/Text'
 import SocialMediaList from '../icons/socialMedia/socialMediaList'
+import Text from '@/components/typography/Text'
 
 export default function Footer() {
   return (

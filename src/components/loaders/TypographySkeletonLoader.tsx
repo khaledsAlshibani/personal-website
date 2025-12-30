@@ -1,5 +1,5 @@
-import { SkeletonLoader } from '@/components/loaders/SkeletonLoader'
 import { useMemo } from 'react'
+import { SkeletonLoader } from '@/components/loaders/SkeletonLoader'
 
 interface TypographySkeletonLoaderProps {
   kind: 'title' | 'subtitle' | 'description'

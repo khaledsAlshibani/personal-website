@@ -1,13 +1,12 @@
 import { createServerFn } from '@tanstack/react-start'
 import {
   DEFAULT_GH_TIMEOUT_MS,
-  fetchPage,
+  fetchPage, getGHApiBaseUrl, getGHApiToken 
 } from '@features/projects/utils/github'
 import type { GithubRepo } from '@features/projects/types/github.types'
-import { getGHApiBaseUrl, getGHApiToken } from '@features/projects/utils/github'
 
 // prettier-ignore
-const allowedReposByOwner: Record<string, string[]> = {
+const allowedReposByOwner: Record<string, Array<string>> = {
   khaledsAlshibani: [
     'php-nextjs-simple-app'
   ],
@@ -21,7 +20,7 @@ const allowedReposByOwner: Record<string, string[]> = {
 }
 
 export const getGithubReposServer = createServerFn({ method: 'GET' }).handler(
-  async (): Promise<GithubRepo[]> => {
+  async (): Promise<Array<GithubRepo>> => {
     const baseUrl = getGHApiBaseUrl()
     const token = getGHApiToken()
 
@@ -54,14 +53,14 @@ export const getGithubReposServer = createServerFn({ method: 'GET' }).handler(
     const unique = new Map<number, GithubRepo>()
     merged.forEach((repo) => unique.set(repo.id, repo))
 
-    const allowedReposByOwnerLower: Record<string, string[]> = Object.keys(
+    const allowedReposByOwnerLower: Record<string, Array<string>> = Object.keys(
       allowedReposByOwner,
     ).reduce(
       (acc, owner) => {
         acc[owner.toLowerCase()] = allowedReposByOwner[owner]
         return acc
       },
-      {} as Record<string, string[]>,
+      {} as Record<string, Array<string>>,
     )
 
     const filtered = Array.from(unique.values()).filter((repo) => {
@@ -71,10 +70,10 @@ export const getGithubReposServer = createServerFn({ method: 'GET' }).handler(
         return false
       }
 
-      const allowed = allowedReposByOwnerLower[owner.toLowerCase()]
-      const allowAll = allowed?.includes('*')
+      const allowed = allowedReposByOwnerLower[owner.toLowerCase()] ?? []
+      const allowAll = allowed.includes('*')
 
-      if (!allowed || allowed.length === 0 || allowAll) {
+      if (allowed.length === 0 || allowAll) {
         return true
       }
 
