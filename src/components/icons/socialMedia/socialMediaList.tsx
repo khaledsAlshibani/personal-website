@@ -62,6 +62,7 @@ export default function SocialMediaList({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
+              title={label}
             >
               <Icon className={iconClassName} size={iconSize} />
             </a>

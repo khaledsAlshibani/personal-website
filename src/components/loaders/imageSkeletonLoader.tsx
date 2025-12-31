@@ -1,12 +1,14 @@
 import { useMemo } from 'react'
-import { SkeletonLoader } from './SkeletonLoader'
+import { SkeletonLoader } from '@/components/loaders/SkeletonLoader'
 import { cn } from '@/utils/cn'
 
 interface ImageSkeletonLoaderProps {
   size: 'small' | 'medium' | 'large'
 }
 
-export default function ImageSkeletonLoader({ size }: ImageSkeletonLoaderProps) {
+export default function ImageSkeletonLoader({
+  size,
+}: ImageSkeletonLoaderProps) {
   const sizeClassName = useMemo(() => {
     switch (size) {
       case 'small':

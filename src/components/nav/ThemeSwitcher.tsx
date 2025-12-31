@@ -10,7 +10,7 @@ interface ThemeSwitcherProps {
 export default function ThemeSwitcher({ className }: ThemeSwitcherProps) {
   const { theme, resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  
+
   useEffect(() => {
     setMounted(true)
   }, [])

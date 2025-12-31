@@ -1,7 +1,9 @@
 import { createServerFn } from '@tanstack/react-start'
 import {
   DEFAULT_GH_TIMEOUT_MS,
-  fetchPage, getGHApiBaseUrl, getGHApiToken 
+  fetchPage,
+  getGHApiBaseUrl,
+  getGHApiToken,
 } from '@features/projects/utils/github'
 import type { GithubRepo } from '@features/projects/types/github.types'
 

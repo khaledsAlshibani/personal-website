@@ -1,5 +1,6 @@
-import Text from '@/components/typography/Text'
-import Title from '@/components/typography/Title'
+import Text from '@/components/core/typography/Text'
+import Title from '@/components/core/typography/Title'
+import Badges from '@/components/listings/Badges'
 import { cn } from '@/utils/cn'
 
 interface ProjectCardProps {
@@ -7,12 +8,14 @@ interface ProjectCardProps {
   description: string
   url?: string
   starsCount?: string
+  skills?: string | Array<string>
 }
 
 export default function ProjectCard({
   title,
   description,
   url,
+  skills,
 }: ProjectCardProps) {
   const Tag = url ? 'a' : 'div'
 
@@ -21,13 +24,16 @@ export default function ProjectCard({
       href={url}
       target={url ? '_blank' : undefined}
       rel={url ? 'noopener noreferrer' : undefined}
-      className={cn(url && 'group', 'ps-4 sm:ps-6')}
+      className={cn(url && 'group')}
       aria-disabled={!url}
     >
       <Title as="h4" className={cn(url && 'group-hover:underline')}>
         {title}
       </Title>
-      <Text size="sm" className='mt-1 opacity-80'>{description}</Text>
+      <Text className="mt-2 opacity-80" keepWhitespace>
+        {description}
+      </Text>
+      {skills && <Badges badges={skills} className="mt-4" />}
     </Tag>
   )
 }

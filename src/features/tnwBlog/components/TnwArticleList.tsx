@@ -1,7 +1,9 @@
 import { useGetTnwArticlesQuery } from '@features/tnwBlog/api/useGetBlogArticles.query'
-import TnwArticle from './TnwArticle'
+import TnwArticle from '@features/tnwBlog/components/TnwArticle'
+import { ArrowRight } from 'lucide-react'
 import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'
-import Title from '@/components/typography/Title'
+import Title from '@/components/core/typography/Title'
+import Button from '@/components/core/Button'
 
 export default function TnwArticleList() {
   const { data, isPending, isError } = useGetTnwArticlesQuery()
@@ -22,7 +24,7 @@ export default function TnwArticleList() {
   if (isError || data.articles.length === 0) return null
 
   return (
-    <div id='blog' className="flex flex-col gap-8 sm:gap-4">
+    <div id="blog" className="flex flex-col gap-8 sm:gap-4">
       <Title as="h2">Latest Blogs</Title>
 
       {data.articles.map(
@@ -38,6 +40,14 @@ export default function TnwArticleList() {
             />
           ),
       )}
+
+      <Button
+        label="Technway Blog"
+        href="http://blog.technway.biz/"
+        icon={<ArrowRight size={16} />}
+        target="_blank"
+        rel="noopener noreferrer"
+      />
     </div>
   )
 }

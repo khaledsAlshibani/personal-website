@@ -1,6 +1,6 @@
 import { Globe } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import Text from '@/components/typography/Text'
+import Text from '@/components/core/typography/Text'
 
 export default function LangSwitcher() {
   const { i18n } = useTranslation()

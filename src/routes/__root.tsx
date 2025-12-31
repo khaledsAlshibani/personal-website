@@ -10,7 +10,7 @@ import { queryClient } from '@/utils/queryClient'
 
 import appCss from '@/styles.css?url'
 
-import '@/i18n';
+import '@/i18n'
 
 export const Route = createRootRoute({
   loader: async () => await getHeaderContent(),
@@ -46,15 +46,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   const lang = (i18n.language || 'en').slice(0, 2)
 
   return (
-    <html lang={lang} className='scroll-smooth' suppressHydrationWarning>
+    <html lang={lang} className="scroll-smooth" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
-        <ThemeProvider
-          defaultTheme="light"
-          enableSystem={false}
-        >
+        <ThemeProvider defaultTheme="light" enableSystem={false}>
           <QueryClientProvider client={queryClient}>
             {children}
             <TanStackDevtools

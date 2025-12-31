@@ -1,11 +1,12 @@
 import { Image } from '@unpic/react'
 import { useState } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import Terminal from '@/components/icons/Terminal'
-import Title from '@/components/typography/Title'
-import Text from '@/components/typography/Text'
+import Title from '@/components/core/typography/Title'
+import Text from '@/components/core/typography/Text'
 import { Route } from '@/routes/__root'
 import SocialMediaList from '@/components/icons/socialMedia/socialMediaList'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import Button from '@/components/core/Button'
 
 export default function Header() {
   const headerData = Route.useLoaderData()
@@ -58,15 +59,12 @@ export default function Header() {
           </Text>
 
           {hasOverflow && (
-            <button
-              type="button"
-              className="mt-6 inline-flex items-center gap-2 font-semibold underline text-[var(--color-contrast)] cursor-pointer"
-              onClick={() => setIsExpanded((prev) => !prev)}
+            <Button
+              label={isExpanded ? 'Show less' : 'Read more'}
+              onClick={() => setIsExpanded(!isExpanded)}
+              icon={<ArrowIconTag size={16} />}
               aria-expanded={isExpanded}
-            >
-              {isExpanded ? 'Show less' : 'Read more'}
-              <ArrowIconTag size={18} />
-            </button>
+            />
           )}
         </div>
       )}
