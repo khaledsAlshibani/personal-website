@@ -48,7 +48,9 @@ export default function ThemeSwitcher({ className }: ThemeSwitcherProps) {
             'focus-visible:ring-4 focus-visible:ring-brand-soft',
             'after:absolute after:start-0.5 after:top-0.5 after:h-5 after:w-5',
             "after:rounded-full after:bg-white after:transition-all after:content-['']",
-            isDark ? 'bg-brand after:translate-x-full rtl:after:-translate-x-full' : '',
+            isDark
+              ? 'bg-brand after:translate-x-full rtl:after:-translate-x-full'
+              : '',
           )}
           aria-hidden="true"
         />

@@ -6,7 +6,6 @@
   --color-body: #faf8f5;
   --color-contrast: #756244;
   --font-sans: 'DM Sans Variable', sans-serif;
-  --font-mono: 'Fira Code Variable', monospace;
 }
 
 :root[data-theme='dark'] {

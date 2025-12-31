@@ -12,8 +12,8 @@ export default function BadgeSkeletonLoader({
       {Array.from({ length: count }).map((_, index) => (
         <SkeletonLoader
           key={index}
-          width="w-12"
-          height="h-6"
+          width="w-10"
+          height="h-5"
           rounded="rounded-full"
         />
       ))}
