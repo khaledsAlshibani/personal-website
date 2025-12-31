@@ -7,5 +7,7 @@ export function useGHReposQuery() {
     queryKey: ['github-repos'],
     queryFn: () => getGithubReposServer(),
     staleTime: 300_000,
+    gcTime: 1_800_000,
+    refetchOnWindowFocus: false,
   })
 }

@@ -1,9 +1,10 @@
-import { useGetTnwArticlesQuery } from '@features/tnwBlog/api/useGetBlogArticles.query'
+import { useGetTnwArticlesQuery } from '@/features/tnwBlog/api/getBlogArticles.query'
 import TnwArticle from '@features/tnwBlog/components/TnwArticle'
 import { ArrowRight } from 'lucide-react'
 import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'
 import Title from '@/components/core/typography/Title'
 import Button from '@/components/core/Button'
+import ButtonSkeletonLoader from '@/components/loaders/ButtonSkeletonLoader'
 
 export default function TnwArticleList() {
   const { data, isPending, isError } = useGetTnwArticlesQuery()
@@ -17,6 +18,7 @@ export default function TnwArticleList() {
             <ArticleSkeletonLoader key={idx} />
           ))}
         </div>
+        <ButtonSkeletonLoader className='mt-2' />
       </div>
     )
   }

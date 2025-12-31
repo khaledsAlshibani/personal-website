@@ -6,6 +6,7 @@ interface TextProps {
   as?: 'p' | 'span'
   keepWhitespace?: boolean
   size?: 'sm' | 'default'
+  id?: string
 }
 
 export default function Text({
@@ -14,11 +15,13 @@ export default function Text({
   as = 'p',
   keepWhitespace = false,
   size = 'default',
+  id,
 }: TextProps) {
   const TextTag = as
 
   return (
     <TextTag
+      id={id}
       className={cn(
         'leading-relaxed',
         keepWhitespace && 'whitespace-pre-line',

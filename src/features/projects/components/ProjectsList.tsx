@@ -45,8 +45,6 @@ export default function ProjectsList({ topProjects = [] }: Props) {
     )
   }
 
-  if (isError || repos.length === 0) return null
-
   return (
     <div id="projects" className="flex flex-col gap-8">
       <Title as="h2">Projects & Contributions</Title>
@@ -67,29 +65,31 @@ export default function ProjectsList({ topProjects = [] }: Props) {
         )}
       </div>
 
-      <div className="flex flex-col gap-6">
-        <Title as="h3" className="border-t border-default pt-8">
-          Featured Repositories
-        </Title>
+      {!isError && repos.length > 0 && (
+        <div className="flex flex-col gap-6">
+          <Title as="h3" className="border-t border-default pt-8">
+            Featured Repositories
+          </Title>
 
-        {repos.map((repo) => {
-          const title =
-            repo.owner?.login && repo.owner.login !== 'khaledsAlshibani'
-              ? `${repo.owner.login}/${repo.name}`
-              : repo.name
+          {repos.map((repo) => {
+            const title =
+              repo.owner?.login && repo.owner.login !== 'khaledsAlshibani'
+                ? `${repo.owner.login}/${repo.name}`
+                : repo.name
 
-          return (
-            <ProjectCard
-              key={repo.id}
-              title={title}
-              description={repo.description || ''}
-              url={repo.html_url}
-              starsCount={repo.stargazers_count.toString()}
-              skills={repo.topics}
-            />
-          )
-        })}
-      </div>
+            return (
+              <ProjectCard
+                key={repo.id}
+                title={title}
+                description={repo.description || ''}
+                url={repo.html_url}
+                starsCount={repo.stargazers_count.toString()}
+                skills={repo.topics}
+              />
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

@@ -5,5 +5,5 @@ export default function ButtonSkeletonLoader({
 }: {
   className?: string
 }) {
-  return <SkeletonLoader className={className} width="w-12" height="h-6" />
+  return <SkeletonLoader className={className} width="w-28" height="h-10" />
 }

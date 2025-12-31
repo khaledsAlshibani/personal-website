@@ -12,9 +12,16 @@ import appCss from '@/styles.css?url'
 
 import '@/i18n'
 
+const siteUrl = import.meta.env.VITE_SITE_URL
+const defaultTitle = 'Khaled Alshibani - Full Stack Developer'
+const defaultDescription =
+  'Full stack web developer with strong frontend foundation, production experience, and focus on performance, stability, and maintainable modern applications.'
+const ogImage = `${siteUrl}/og.png`
+
 export const Route = createRootRoute({
   loader: async () => await getHeaderContent(),
   head: () => ({
+    title: defaultTitle,
     meta: [
       {
         charSet: 'utf-8',
@@ -24,16 +31,61 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'Khaled Alshibani - Full Stack developer',
-        description:
-          'I am a web developer with a strong front end foundation and solid full stack experience, working on real production web applications. I have experience maintaining existing systems as well as building and extending modern web applications, dealing with real constraints such as performance, stability, and long-term maintainability.',
-        author: 'Khaled Alshibani',
+        title: defaultTitle,
+      },
+      {
+        name: 'description',
+        content: defaultDescription,
+      },
+      {
+        property: 'og:title',
+        content: defaultTitle,
+      },
+      {
+        property: 'og:description',
+        content: defaultDescription,
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:url',
+        content: siteUrl,
+      },
+      {
+        property: 'og:image',
+        content: ogImage,
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: defaultTitle,
+      },
+      {
+        name: 'twitter:description',
+        content: defaultDescription,
+      },
+      {
+        name: 'twitter:image',
+        content: ogImage,
+      },
+      {
+        name: 'twitter:url',
+        content: siteUrl,
       },
     ],
     links: [
       {
         rel: 'stylesheet',
         href: appCss,
+      },
+      {
+        rel: 'canonical',
+        href: siteUrl,
       },
     ],
   }),

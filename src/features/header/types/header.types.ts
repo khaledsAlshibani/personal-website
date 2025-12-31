@@ -2,6 +2,7 @@ export interface HeaderContent {
   id: number
   titlePrefix?: string
   title: string
+  summary?: string
   description: string
   img: {
     src: string
