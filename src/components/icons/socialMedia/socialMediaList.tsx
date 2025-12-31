@@ -3,6 +3,7 @@ import type { ReactElement } from 'react'
 import Facebook from '@/components/icons/socialMedia/Facebook'
 import Github from '@/components/icons/socialMedia/Github'
 import Linkedin from '@/components/icons/socialMedia/Linkedin'
+import Codepen from '@/components/icons/socialMedia/Codepen'
 import { XPlatform } from '@/components/icons/socialMedia/XPlatform'
 import { cn } from '@/utils/cn'
 
@@ -22,6 +23,7 @@ export const socialMediaIcons = {
   github: 'Github',
   linkedin: 'Linkedin',
   x: 'XPlatform',
+  codepen: 'Codepen',
 } as const
 
 export type SocialMediaIcon = keyof typeof socialMediaIcons
@@ -34,6 +36,7 @@ const iconComponents: Record<
   github: Github,
   linkedin: Linkedin,
   x: XPlatform,
+  codepen: Codepen,
 }
 
 const defaultItems: Array<SocialMediaItem> = [
@@ -41,6 +44,7 @@ const defaultItems: Array<SocialMediaItem> = [
   { name: 'linkedin', url: 'https://www.linkedin.com/in/khaledsalshibani/' },
   { name: 'x', url: 'https://x.com/khaleds_saif' },
   { name: 'facebook', url: 'https://facebook.com/khaledsAlshibani' },
+  { name: 'codepen', url: 'https://codepen.io/khaledsAlshibani' },
 ]
 
 export default function SocialMediaList({

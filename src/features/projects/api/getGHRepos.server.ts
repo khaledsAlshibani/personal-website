@@ -9,15 +9,15 @@ import type { GithubRepo } from '@features/projects/types/github.types'
 
 // prettier-ignore
 const allowedReposByOwner: Record<string, Array<string>> = {
-  khaledsAlshibani: [
-    'php-nextjs-simple-app'
+  letssummarize: ['*'],
+  'SAHIM-Platform': [
+    'sahim-api'
   ],
   technway: [
     'graphql-starter',
   ],
-  letssummarize: ['*'],
-  'SAHIM-Platform': [
-    'sahim-api'
+  khaledsAlshibani: [
+    'php-nextjs-simple-app'
   ],
 }
 
@@ -82,8 +82,41 @@ export const getGithubReposServer = createServerFn({ method: 'GET' }).handler(
       return allowed.includes(repo.name)
     })
 
-    // sort by stargazers_count desc
-    filtered.sort((a, b) => b.stargazers_count - a.stargazers_count)
+    const ownerOrder = Object.keys(allowedReposByOwnerLower)
+    const repoOrderByOwner = ownerOrder.reduce(
+      (acc, owner) => {
+        const repos = allowedReposByOwnerLower[owner]
+        if (!repos.includes('*')) {
+          acc[owner] = Object.fromEntries(
+            repos.map((name, idx) => [name.toLowerCase(), idx]),
+          )
+        }
+        return acc
+      },
+      {} as Partial<Record<string, Record<string, number>>>,
+    )
+
+    filtered.sort((a, b) => {
+      const ownerA = a.owner?.login.toLowerCase() ?? ''
+      const ownerB = b.owner?.login.toLowerCase() ?? ''
+
+      const ownerIdxA = ownerOrder.indexOf(ownerA)
+      const ownerIdxB = ownerOrder.indexOf(ownerB)
+      const normOwnerIdxA = ownerIdxA === -1 ? ownerOrder.length : ownerIdxA
+      const normOwnerIdxB = ownerIdxB === -1 ? ownerOrder.length : ownerIdxB
+      if (normOwnerIdxA !== normOwnerIdxB) return normOwnerIdxA - normOwnerIdxB
+
+      const repoIdxA = repoOrderByOwner[ownerA]?.[a.name.toLowerCase()]
+      const repoIdxB = repoOrderByOwner[ownerB]?.[b.name.toLowerCase()]
+
+      const hasRepoOrderA = repoIdxA !== undefined
+      const hasRepoOrderB = repoIdxB !== undefined
+      if (hasRepoOrderA && hasRepoOrderB) return repoIdxA - repoIdxB
+      if (hasRepoOrderA) return -1
+      if (hasRepoOrderB) return 1
+
+      return 0
+    })
 
     return filtered
   },

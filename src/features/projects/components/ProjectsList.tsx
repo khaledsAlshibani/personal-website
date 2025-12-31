@@ -1,29 +1,25 @@
 import ProjectCard from '@features/projects/components/ProjectCard'
 import { useGHReposQuery } from '@features/projects/api/getGHRepos.query'
 import ProjectSkeletonLoader from '@features/projects/components/ProjectSkeletonLoader'
+import type { TopProject } from '@features/projects/types/topProjects.types'
 import Title from '@/components/core/typography/Title'
 import Text from '@/components/core/typography/Text'
 
-type Props = {
-  topProjects?: Array<{
-    id: number
-    title: string
-    description: string
-    skills?: string | Array<string>
-  }>
+interface ProjectsListProps {
+  topProjects?: Array<TopProject>
 }
 
-export default function ProjectsList({ topProjects = [] }: Props) {
+export default function ProjectsList({ topProjects = [] }: ProjectsListProps) {
   const { data: repos = [], isPending, isError } = useGHReposQuery()
 
   const showError = !isPending && (isError || repos.length === 0)
   const pendingComplete = !isPending && !isError && repos.length > 0
 
   return (
-    <div id="projects" className="flex flex-col gap-8">
+    <div id="projects" className="flex flex-col gap-6">
       <Title as="h2">Projects & Contributions</Title>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-8">
         <Title as="h3">Featured Projects</Title>
         {topProjects.length > 0 && (
           <>
@@ -33,6 +29,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
                 title={proj.title}
                 description={proj.description}
                 skills={proj.skills}
+                date={proj.date}
               />
             ))}
           </>
@@ -45,7 +42,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
         </Title>
 
         {isPending && (
-          <div className="grid gap-4">
+          <div className="grid gap-8">
             {Array.from({ length: 3 }).map((_, idx) => (
               <ProjectSkeletonLoader key={idx} />
             ))}
@@ -59,7 +56,7 @@ export default function ProjectsList({ topProjects = [] }: Props) {
         )}
 
         {pendingComplete && (
-          <div className="grid gap-4">
+          <div className="grid gap-8">
             {repos.map((repo) => {
               const title =
                 repo.owner?.login && repo.owner.login !== 'khaledsAlshibani'

@@ -7,8 +7,8 @@ export const navbarData = {
     },
     {
       id: 2,
-      label: 'blog',
-      href: '#blog',
+      label: 'blogs',
+      href: '#blogs',
     },
     {
       id: 3,

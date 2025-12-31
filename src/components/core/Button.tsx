@@ -33,7 +33,7 @@ export default function Button({
     <Tag
       type={computedType as any}
       className={cn(
-        'mt-6 inline-flex items-center gap-2 font-semibold underline! text-[var(--color-contrast)] cursor-pointer',
+        'inline-flex items-center gap-2 font-semibold underline! text-[var(--color-contrast)] cursor-pointer',
         className,
       )}
       href={href}

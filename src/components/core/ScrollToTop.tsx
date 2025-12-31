@@ -25,7 +25,7 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       className={cn(
         'bg-contrast text-white',
-        'mt-0 fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg hover:opacity-90 transition-opacity duration-300',
+        'mt-0 fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 p-3 rounded-full shadow-lg hover:opacity-90 transition-opacity duration-300',
         show
           ? 'opacity-100 pointer-events-auto'
           : 'opacity-0 pointer-events-none',

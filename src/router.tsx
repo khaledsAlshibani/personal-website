@@ -1,4 +1,4 @@
-import { createRouter, Navigate } from '@tanstack/react-router'
+import { Navigate, createRouter } from '@tanstack/react-router'
 
 // Import the generated route tree
 import { routeTree } from '@/routeTree.gen'

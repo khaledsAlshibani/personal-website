@@ -26,7 +26,7 @@ export default function TnwArticleList() {
   if (isError || data.articles.length === 0) return null
 
   return (
-    <div id="blog" className="flex flex-col gap-8 sm:gap-4">
+    <div id="blogs" className="flex flex-col gap-8 sm:gap-4">
       <Title as="h2">Latest Blogs</Title>
 
       {data.articles.map(
@@ -49,6 +49,7 @@ export default function TnwArticleList() {
         icon={<ArrowRight size={16} />}
         target="_blank"
         rel="noopener noreferrer"
+        className="mt-6"
       />
     </div>
   )

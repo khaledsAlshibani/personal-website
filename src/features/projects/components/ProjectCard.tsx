@@ -9,6 +9,7 @@ interface ProjectCardProps {
   url?: string
   starsCount?: string
   skills?: string | Array<string>
+  date?: string
 }
 
 export default function ProjectCard({
@@ -16,6 +17,7 @@ export default function ProjectCard({
   description,
   url,
   skills,
+  date,
 }: ProjectCardProps) {
   const Tag = url ? 'a' : 'div'
 
@@ -27,9 +29,12 @@ export default function ProjectCard({
       className={cn(url && 'group')}
       aria-disabled={!url}
     >
-      <Title as="h4" className={cn(url && 'group-hover:underline')}>
-        {title}
-      </Title>
+      <div className="flex items-center gap-2">
+        <Title as="h4" className={cn(url && 'group-hover:underline')}>
+          {title}
+        </Title>
+        {date && <Text>({date})</Text>}
+      </div>
       <Text className="mt-2 opacity-80" keepWhitespace>
         {description}
       </Text>

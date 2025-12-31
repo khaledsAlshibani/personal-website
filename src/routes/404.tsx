@@ -1,7 +1,7 @@
-import Text from '@/components/core/typography/Text'
-import Title from '@/components/core/typography/Title'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
+import Title from '@/components/core/typography/Title'
+import Text from '@/components/core/typography/Text'
 
 export const Route = createFileRoute('/404')({
   component: RouteComponent,
