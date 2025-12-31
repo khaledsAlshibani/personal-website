@@ -3,14 +3,13 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from 'next-themes'
-import { useTranslation } from 'react-i18next'
 
 import { getHeaderContent } from '@features/header/data/header.data'
 import { queryClient } from '@/utils/queryClient'
 
 import appCss from '@/styles.css?url'
 
-import '@/i18n'
+// import '@/i18n'
 
 const siteUrl = import.meta.env.VITE_SITE_URL
 const defaultTitle = 'Khaled Alshibani - Full Stack Developer'
@@ -94,8 +93,9 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const { i18n } = useTranslation()
-  const lang = (i18n.language || 'en').slice(0, 2)
+  // const { i18n } = useTranslation()
+  // const lang = (i18n.language || 'en').slice(0, 2)
+  const lang = 'en'
 
   return (
     <html lang={lang} className="scroll-smooth" suppressHydrationWarning>

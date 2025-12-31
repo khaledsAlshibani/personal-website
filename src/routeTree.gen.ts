@@ -9,48 +9,55 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as LangIndexRouteImport } from './routes/$lang/index'
 
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LangIndexRoute = LangIndexRouteImport.update({
-  id: '/$lang/',
-  path: '/$lang/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$lang': typeof LangIndexRoute
+  '/404': typeof R404Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$lang': typeof LangIndexRoute
+  '/404': typeof R404Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/$lang/': typeof LangIndexRoute
+  '/404': typeof R404Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$lang'
+  fullPaths: '/' | '/404'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$lang'
-  id: '__root__' | '/' | '/$lang/'
+  to: '/' | '/404'
+  id: '__root__' | '/' | '/404'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LangIndexRoute: typeof LangIndexRoute
+  R404Route: typeof R404Route
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/404': {
+      id: '/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -58,19 +65,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/$lang/': {
-      id: '/$lang/'
-      path: '/$lang'
-      fullPath: '/$lang'
-      preLoaderRoute: typeof LangIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LangIndexRoute: LangIndexRoute,
+  R404Route: R404Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

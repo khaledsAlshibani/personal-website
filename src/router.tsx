@@ -1,4 +1,4 @@
-import { createRouter } from '@tanstack/react-router'
+import { createRouter, Navigate } from '@tanstack/react-router'
 
 // Import the generated route tree
 import { routeTree } from '@/routeTree.gen'
@@ -9,6 +9,8 @@ export const getRouter = () => {
     routeTree,
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    notFoundMode: 'root',
+    defaultNotFoundComponent: () => <Navigate to="/404" replace />,
   })
 
   return router
