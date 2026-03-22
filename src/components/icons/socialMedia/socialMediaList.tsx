@@ -6,6 +6,7 @@ import Linkedin from '@/components/icons/socialMedia/Linkedin'
 import Codepen from '@/components/icons/socialMedia/Codepen'
 import { XPlatform } from '@/components/icons/socialMedia/XPlatform'
 import { cn } from '@/utils/cn'
+import { trackContactClicked, trackGithubLinkClicked } from '@/utils/posthog'
 
 interface SocialMediaItem {
   name: SocialMediaIcon
@@ -59,6 +60,14 @@ export default function SocialMediaList({
         const Icon = iconComponents[name]
         const label = socialMediaIcons[name].replace(/([A-Z])([A-Z])/g, '$1 $2')
 
+        const handleClick = () => {
+          if (name === 'github') {
+            trackGithubLinkClicked(url)
+          } else {
+            trackContactClicked(name)
+          }
+        }
+
         return (
           <li key={url}>
             <a
@@ -67,6 +76,7 @@ export default function SocialMediaList({
               rel="noopener noreferrer"
               aria-label={label}
               title={label}
+              onClick={handleClick}
             >
               <Icon className={iconClassName} size={iconSize} />
             </a>

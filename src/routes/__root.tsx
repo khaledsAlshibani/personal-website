@@ -3,19 +3,19 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from 'next-themes'
-
 import { getHeaderContent } from '@features/header/data/header.data'
 import { queryClient } from '@/utils/queryClient'
+import { PostHogProvider } from '@/components/providers/PostHogProvider'
+import { SITE_URL } from '@/utils/url'
 
 import appCss from '@/styles.css?url'
 
 // import '@/i18n'
 
-const siteUrl = import.meta.env.VITE_SITE_URL
 const defaultTitle = 'Khaled Alshibani - Full Stack Developer'
 const defaultDescription =
   'Full stack web developer with strong frontend foundation, production experience, and focus on performance, stability, and maintainable modern applications.'
-const ogImage = `${siteUrl}/og.png`
+const ogImage = `${SITE_URL}/og.png`
 
 export const Route = createRootRoute({
   loader: async () => await getHeaderContent(),
@@ -50,7 +50,7 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:url',
-        content: siteUrl,
+        content: SITE_URL,
       },
       {
         property: 'og:image',
@@ -74,7 +74,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:url',
-        content: siteUrl,
+        content: SITE_URL,
       },
     ],
     links: [
@@ -84,7 +84,7 @@ export const Route = createRootRoute({
       },
       {
         rel: 'canonical',
-        href: siteUrl,
+        href: SITE_URL,
       },
     ],
   }),
@@ -105,18 +105,20 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <ThemeProvider defaultTheme="light" enableSystem={false}>
           <QueryClientProvider client={queryClient}>
-            {children}
-            <TanStackDevtools
-              config={{
-                position: 'bottom-right',
-              }}
-              plugins={[
-                {
-                  name: 'Tanstack Router',
-                  render: <TanStackRouterDevtoolsPanel />,
-                },
-              ]}
-            />
+            <PostHogProvider>
+              {children}
+              <TanStackDevtools
+                config={{
+                  position: 'bottom-right',
+                }}
+                plugins={[
+                  {
+                    name: 'Tanstack Router',
+                    render: <TanStackRouterDevtoolsPanel />,
+                  },
+                ]}
+              />
+            </PostHogProvider>
           </QueryClientProvider>
         </ThemeProvider>
         <Scripts />

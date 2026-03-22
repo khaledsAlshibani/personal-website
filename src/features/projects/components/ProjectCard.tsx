@@ -2,6 +2,7 @@ import Text from '@/components/core/typography/Text'
 import Title from '@/components/core/typography/Title'
 import Badges from '@/components/listings/Badges'
 import { cn } from '@/utils/cn'
+import { trackGithubLinkClicked, trackProjectClicked } from '@/utils/posthog'
 
 interface ProjectCardProps {
   title: string
@@ -21,6 +22,15 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const Tag = url ? 'a' : 'div'
 
+  const handleClick = () => {
+    if (url) {
+      trackProjectClicked(title)
+      if (url.includes('github.com')) {
+        trackGithubLinkClicked(url)
+      }
+    }
+  }
+
   return (
     <Tag
       href={url}
@@ -28,6 +38,7 @@ export default function ProjectCard({
       rel={url ? 'noopener noreferrer' : undefined}
       className={cn(url && 'group')}
       aria-disabled={!url}
+      onClick={handleClick}
     >
       <div className="flex items-center gap-2">
         <Title as="h4" className={cn(url && 'group-hover:underline')}>
