@@ -3,11 +3,12 @@ import { getGithubReposServer } from '@features/projects/api/getGHRepos.server'
 import type { GithubRepo } from '@features/projects/types/github.types'
 
 export function useGHReposQuery() {
-  return useQuery<Array<GithubRepo>, Error>({
+  return useQuery<Array<GithubRepo>>({
     queryKey: ['github-repos'],
     queryFn: () => getGithubReposServer(),
     staleTime: 300_000,
     gcTime: 1_800_000,
     refetchOnWindowFocus: false,
+    retry: false,
   })
 }

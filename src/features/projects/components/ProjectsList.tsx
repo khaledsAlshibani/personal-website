@@ -1,9 +1,11 @@
 import ProjectCard from '@features/projects/components/ProjectCard'
 import { useGHReposQuery } from '@features/projects/api/getGHRepos.query'
 import ProjectSkeletonLoader from '@features/projects/components/ProjectSkeletonLoader'
+import { ArrowRight } from 'lucide-react'
 import type { TopProject } from '@features/projects/types/topProjects.types'
 import Title from '@/components/core/typography/Title'
 import Text from '@/components/core/typography/Text'
+import Button from '@/components/core/Button'
 
 interface ProjectsListProps {
   topProjects?: Array<TopProject>
@@ -50,9 +52,20 @@ export default function ProjectsList({ topProjects = [] }: ProjectsListProps) {
         )}
 
         {showError && (
-          <Text size="sm" className="opacity-70">
-            Unable to load repositories right now. Please try again later.
-          </Text>
+          <div className="flex flex-col gap-4">
+            <Text size="sm" className="opacity-70">
+              Oh sorry! Repositories couldn&apos;t be loaded here right now :(
+              They&apos;re still available on GitHub though... feel free to take
+              a look
+            </Text>
+            <Button
+              label="View on GitHub"
+              href="https://github.com/khaledsAlshibani?tab=repositories"
+              icon={<ArrowRight size={16} />}
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          </div>
         )}
 
         {pendingComplete && (

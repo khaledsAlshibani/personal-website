@@ -1,5 +1,7 @@
 import TnwArticle from '@features/tnwBlog/components/TnwArticle'
 import { ArrowRight } from 'lucide-react'
+import { useGetDevToArticlesQuery } from '@features/devTo/api/getDevToArticles.query'
+import { mergeArticles } from '@features/articles/utils/mergeArticles'
 import { useGetTnwArticlesQuery } from '@/features/tnwBlog/api/getBlogArticles.query'
 import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'
 import Title from '@/components/core/typography/Title'
@@ -7,7 +9,12 @@ import Button from '@/components/core/Button'
 import ButtonSkeletonLoader from '@/components/loaders/ButtonSkeletonLoader'
 
 export default function TnwArticleList() {
-  const { data, isPending, isError } = useGetTnwArticlesQuery()
+  const { data: tnwData, isPending: tnwPending } = useGetTnwArticlesQuery()
+  const { data: devToData, isPending: devToPending } =
+    useGetDevToArticlesQuery()
+
+  const articles = mergeArticles(tnwData?.articles ?? [], devToData ?? [])
+  const isPending = articles.length === 0 && (tnwPending || devToPending)
 
   if (isPending) {
     return (
@@ -18,39 +25,47 @@ export default function TnwArticleList() {
             <ArticleSkeletonLoader key={idx} />
           ))}
         </div>
-        <ButtonSkeletonLoader className="mt-2" />
+        <div className="flex flex-wrap gap-6 mt-2">
+          <ButtonSkeletonLoader />
+          <ButtonSkeletonLoader />
+        </div>
       </div>
     )
   }
 
-  if (isError || data.articles.length === 0) return null
+  if (articles.length === 0) return null
 
   return (
     <div id="blogs" className="flex flex-col gap-8 sm:gap-4">
       <Title as="h2">Latest Blogs</Title>
 
-      {data.articles.map(
-        (article) =>
-          article && (
-            <TnwArticle
-              key={article.slug || ''}
-              slug={article.slug || ''}
-              title={article.title || ''}
-              date={article.publishedAt || ''}
-              imageSrc={article.cover?.url || ''}
-              imageAlt={article.title || ''}
-            />
-          ),
-      )}
+      {articles.map((article) => (
+        <TnwArticle
+          key={article.id}
+          href={article.href}
+          title={article.title}
+          date={article.date}
+          imageSrc={article.imageSrc}
+          imageAlt={article.imageAlt}
+        />
+      ))}
 
-      <Button
-        label="Technway Blog"
-        href="http://blog.technway.biz/"
-        icon={<ArrowRight size={16} />}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-6"
-      />
+      <div className="flex flex-wrap gap-6 mt-6">
+        <Button
+          label="Technway Blog"
+          href="http://blog.technway.biz/"
+          icon={<ArrowRight size={16} />}
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+        <Button
+          label="DEV Community"
+          href="https://dev.to/khaledsalshibani"
+          icon={<ArrowRight size={16} />}
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+      </div>
     </div>
   )
 }

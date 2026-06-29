@@ -8,10 +8,13 @@
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "check": "prettier --write . && eslint --fix",
     "codegen": "graphql-codegen --config codegen.ts",
-    "codegen:watch": "graphql-codegen --config codegen.ts --watch"
+    "codegen:watch": "graphql-codegen --config codegen.ts --watch",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.2.8",
@@ -52,12 +55,20 @@
     "@vitejs/plugin-react": "^5.0.4",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
+    "husky": "^9.1.7",
     "jsdom": "^27.0.0",
+    "lint-staged": "^17.0.8",
     "prettier": "^3.5.3",
     "tailwind-merge": "^3.4.0",
     "typescript": "^5.7.2",
     "vite": "^7.1.7",
     "vitest": "^3.0.5",
     "web-vitals": "^5.1.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

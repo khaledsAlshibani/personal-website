@@ -14,8 +14,7 @@ export default function Footer() {
         )}
       >
         <Text as="span" size="sm" className="opacity-70">
-          &copy; {new Date().getFullYear()}
-          Khaled Alshibani @
+          &copy; {new Date().getFullYear()}&nbsp; Khaled Alshibani @
           <Button
             label=" Technway.biz"
             href="https://technway.biz/"

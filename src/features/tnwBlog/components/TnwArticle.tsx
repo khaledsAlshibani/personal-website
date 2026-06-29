@@ -3,14 +3,13 @@ import { Clock } from 'lucide-react'
 import { formatDate } from '@/utils/date'
 import Title from '@/components/core/typography/Title'
 import Text from '@/components/core/typography/Text'
-import { buildTnwBlogSlug } from '@/features/tnwBlog/utils/slug'
 
 interface TnwArticleProps {
   title: string
   date: string
   imageSrc: string
   imageAlt: string
-  slug: string
+  href: string
 }
 
 export default function TnwArticle({
@@ -18,10 +17,10 @@ export default function TnwArticle({
   date,
   imageSrc,
   imageAlt,
-  slug,
+  href,
 }: TnwArticleProps) {
   return (
-    <a href={buildTnwBlogSlug(slug)} target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer">
       <article className="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center justify-between">
         <div className="relative w-full sm:w-32 lg:w-40 aspect-16/10 rounded overflow-hidden border border-default shrink-0">
           <Image
