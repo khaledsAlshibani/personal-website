@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getDevToArticlesServer } from '@features/devTo/api/getDevToArticles.server'
+import { getDevToArticlesServer } from '@features/devTo/api/getDevToArticles.functions'
 
 export function useGetDevToArticlesQuery() {
   return useQuery({

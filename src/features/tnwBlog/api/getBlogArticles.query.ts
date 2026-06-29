@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getTnwArticlesServer } from '@features/tnwBlog/api/getTnwArticles.server'
+import { getTnwArticlesServer } from '@features/tnwBlog/api/getTnwArticles.functions'
 
 export function useGetTnwArticlesQuery() {
   return useQuery({

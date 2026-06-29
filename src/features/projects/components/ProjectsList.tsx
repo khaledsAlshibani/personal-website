@@ -18,7 +18,7 @@ export default function ProjectsList({ topProjects = [] }: ProjectsListProps) {
   const pendingComplete = !isPending && !isError && repos.length > 0
 
   return (
-    <div id="projects" className="flex flex-col gap-6">
+    <div id="projects" className="flex flex-col gap-9">
       <Title as="h2">Projects & Contributions</Title>
 
       <div className="flex flex-col gap-8">

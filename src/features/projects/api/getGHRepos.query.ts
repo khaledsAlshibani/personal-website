@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getGithubReposServer } from '@features/projects/api/getGHRepos.server'
+import { getGithubReposServer } from '@features/projects/api/getGHRepos.functions'
 import type { GithubRepo } from '@features/projects/types/github.types'
 
 export function useGHReposQuery() {

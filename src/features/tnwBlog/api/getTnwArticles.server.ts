@@ -1,4 +1,3 @@
-import { createServerFn } from '@tanstack/react-start'
 import request from 'graphql-request'
 import type { GetArticlesQuery } from '@/graphql/graphql'
 import { graphql } from '@/graphql'
@@ -40,37 +39,35 @@ const TnwArticlesQueryDocument = graphql(`
   }
 `)
 
-export const getTnwArticlesServer = createServerFn({ method: 'GET' }).handler(
-  async (): Promise<GetArticlesQuery> => {
-    try {
-      return await withTimeout(
-        request<GetArticlesQuery>(
-          getTnwBlogApiPublicUrl(),
-          TnwArticlesQueryDocument.toString(),
-          {
-            pagination: { limit: 4 },
-            sort: ['publishedAt:desc'],
-            status: 'PUBLISHED',
-            filters: {
-              author: {
-                name: {
-                  eq: 'Khaled Alshibani',
-                },
+export async function fetchTnwArticles(): Promise<GetArticlesQuery> {
+  try {
+    return await withTimeout(
+      request<GetArticlesQuery>(
+        getTnwBlogApiPublicUrl(),
+        TnwArticlesQueryDocument.toString(),
+        {
+          pagination: { limit: 4 },
+          sort: ['publishedAt:desc'],
+          status: 'PUBLISHED',
+          filters: {
+            author: {
+              name: {
+                eq: 'Khaled Alshibani',
               },
             },
           },
-          {
-            Authorization: `Bearer ${getTnwBlogApiToken()}`,
-          },
-        ),
-        DEFAULT_FETCH_TIMEOUT_MS,
-      )
-    } catch (error) {
-      logError('tnw-articles', error, {
-        url: getTnwBlogApiPublicUrl(),
-        timeoutMs: DEFAULT_FETCH_TIMEOUT_MS,
-      })
-      return emptyTnwArticles
-    }
-  },
-)
+        },
+        {
+          Authorization: `Bearer ${getTnwBlogApiToken()}`,
+        },
+      ),
+      DEFAULT_FETCH_TIMEOUT_MS,
+    )
+  } catch (error) {
+    logError('tnw-articles', error, {
+      url: getTnwBlogApiPublicUrl(),
+      timeoutMs: DEFAULT_FETCH_TIMEOUT_MS,
+    })
+    return emptyTnwArticles
+  }
+}
