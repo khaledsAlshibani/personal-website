@@ -16,6 +16,7 @@ const defaultTitle = 'Khaled Alshibani - Full Stack Developer'
 const defaultDescription =
   'Full stack web developer with strong frontend foundation, production experience, and focus on performance, stability, and maintainable modern applications.'
 const ogImage = `${SITE_URL}/og.png`
+const twitterOgImage = `${SITE_URL}/twitter-og.png`
 
 export const Route = createRootRoute({
   loader: async () => await getHeaderContent(),
@@ -70,7 +71,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:image',
-        content: ogImage,
+        content: twitterOgImage,
       },
       {
         name: 'twitter:url',
