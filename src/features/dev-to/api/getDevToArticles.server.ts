@@ -1,4 +1,4 @@
-import type { DevToArticle } from '@features/devTo/types/devTo.types'
+import type { DevToArticle } from '@features/dev-to/types/devTo.types'
 import { fetchWithTimeout } from '@/utils/fetch'
 import { logError } from '@/utils/logError'
 

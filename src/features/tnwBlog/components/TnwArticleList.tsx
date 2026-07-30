@@ -1,6 +1,6 @@
 import TnwArticle from '@features/tnwBlog/components/TnwArticle'
 import { ArrowRight } from 'lucide-react'
-import { useGetDevToArticlesQuery } from '@features/devTo/api/getDevToArticles.query'
+import { useGetDevToArticlesQuery } from '@features/dev-to/api/getDevToArticles.query'
 import { mergeArticles } from '@features/articles/utils/mergeArticles'
 import { useGetTnwArticlesQuery } from '@/features/tnwBlog/api/getBlogArticles.query'
 import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'

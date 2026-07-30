@@ -1,6 +1,6 @@
 import { buildTnwBlogSlug } from '@features/tnwBlog/utils/slug'
 import type { ArticleItem } from '@features/articles/types/article.types'
-import type { DevToArticle } from '@features/devTo/types/devTo.types'
+import type { DevToArticle } from '@features/dev-to/types/devTo.types'
 import type { GetArticlesQuery } from '@/graphql/graphql'
 
 type TnwArticle = NonNullable<GetArticlesQuery['articles'][number]>

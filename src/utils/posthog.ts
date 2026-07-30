@@ -1,4 +1,5 @@
 import posthog from 'posthog-js'
+import { hasAnalyticsConsent } from '@features/cookie-consent/utils/cookieConsent'
 import { SITE_URL } from './url'
 
 export const IS_DEV = import.meta.env.DEV
@@ -16,6 +17,10 @@ export const logEvent = (
 const trackEvent = (eventName: string, properties: Record<string, any>) => {
   if (IS_DEV) {
     logEvent(eventName, properties)
+    return
+  }
+
+  if (!hasAnalyticsConsent()) {
     return
   }
 
