@@ -7,6 +7,13 @@ import tailwindcss from '@tailwindcss/vite'
 import { nitro } from 'nitro/vite'
 
 const config = defineConfig({
+  server: {
+    watch: {
+      // Prevent TanStack Router generator / Vite watcher feedback loop
+      // https://github.com/TanStack/router/issues/6775
+      ignored: ['**/routeTree.gen.ts'],
+    },
+  },
   plugins: [
     devtools(),
     nitro(),
