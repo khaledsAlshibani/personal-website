@@ -1,4 +1,4 @@
 export function buildTnwBlogSlug(slug: string) {
-  const baseUrl = 'https://blog.technway.biz'
+  const baseUrl = 'https://technway.biz/en/blog'
   return `${baseUrl}/${slug}`
 }

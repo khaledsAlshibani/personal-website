@@ -9,15 +9,13 @@ import { logError } from '@/utils/logError'
 
 // prettier-ignore
 const allowedReposByOwner: Record<string, Array<string>> = {
+  technway: [
+    'technway-component-library',
+    'graphql-starter',
+  ],
   letssummarize: ['*'],
   'SAHIM-Platform': [
     'sahim-api'
-  ],
-  technway: [
-    'graphql-starter',
-  ],
-  khaledsAlshibani: [
-    'php-nextjs-simple-app'
   ],
 }
 

@@ -53,7 +53,7 @@ export default function TnwArticleList() {
       <div className="flex flex-wrap gap-6 mt-6">
         <Button
           label="Technway Blog"
-          href="http://blog.technway.biz/"
+          href="https://technway.biz/en/blog/"
           icon={<ArrowRight size={16} />}
           target="_blank"
           rel="noopener noreferrer"
