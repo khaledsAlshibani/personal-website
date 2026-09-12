@@ -1377,28 +1377,28 @@ export class TypedDocumentString<TResult, TVariables>
 }
 
 export const GetArticlesDocument = new TypedDocumentString(`
-    query GetArticles($pagination: PaginationArg = {}, $sort: [String] = [], $status: PublicationStatus = PUBLISHED, $filters: ArticleFiltersInput) {
-  articles(
-    pagination: $pagination
-    sort: $sort
-    status: $status
-    filters: $filters
-  ) {
-    title
-    description
-    excerpt
-    slug
-    publishedAt
-    cover {
-      url
-    }
-    category {
-      name
+  query GetArticles($pagination: PaginationArg = {}, $sort: [String] = [], $status: PublicationStatus = PUBLISHED, $filters: ArticleFiltersInput) {
+    articles(
+      pagination: $pagination
+      sort: $sort
+      status: $status
+      filters: $filters
+    ) {
+      title
+      description
+      excerpt
       slug
+      publishedAt
+      cover {
+        url
+      }
+      category {
+        name
+        slug
+      }
     }
   }
-}
-    `) as unknown as TypedDocumentString<
+`) as unknown as TypedDocumentString<
   GetArticlesQuery,
   GetArticlesQueryVariables
 >

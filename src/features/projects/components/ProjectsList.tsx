@@ -60,7 +60,7 @@ export default function ProjectsList({ topProjects = [] }: ProjectsListProps) {
             </Text>
             <Button
               label="View on GitHub"
-              href="https://github.com/khaledsAlshibani?tab=repositories"
+              href="https://github.com/khaledsAlshibani"
               icon={<ArrowRight size={16} />}
               target="_blank"
               rel="noopener noreferrer"

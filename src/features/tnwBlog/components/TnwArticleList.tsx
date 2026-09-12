@@ -1,5 +1,6 @@
 import TnwArticle from '@features/tnwBlog/components/TnwArticle'
 import { ArrowRight } from 'lucide-react'
+import { TNW_BLOG_AUTHOR_URL } from '@features/tnwBlog/utils/constants'
 import { useGetDevToArticlesQuery } from '@features/dev-to/api/getDevToArticles.query'
 import { mergeArticles } from '@features/articles/utils/mergeArticles'
 import { useGetTnwArticlesQuery } from '@/features/tnwBlog/api/getBlogArticles.query'
@@ -13,7 +14,7 @@ export default function TnwArticleList() {
   const { data: devToData, isPending: devToPending } =
     useGetDevToArticlesQuery()
 
-  const articles = mergeArticles(tnwData?.articles ?? [], devToData ?? [])
+  const articles = mergeArticles(tnwData ?? [], devToData ?? [])
   const isPending = articles.length === 0 && (tnwPending || devToPending)
 
   if (isPending) {
@@ -53,7 +54,7 @@ export default function TnwArticleList() {
       <div className="flex flex-wrap gap-6 mt-6">
         <Button
           label="Technway Blog"
-          href="https://technway.biz/en/blog/"
+          href={TNW_BLOG_AUTHOR_URL}
           icon={<ArrowRight size={16} />}
           target="_blank"
           rel="noopener noreferrer"
