@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { TNW_BLOG_AUTHOR_URL } from '@features/tnwBlog/utils/constants'
 import { useGetDevToArticlesQuery } from '@features/dev-to/api/getDevToArticles.query'
 import { ARTICLES_LIMIT } from '@features/articles/utils/constants'
+import { resolveArticleCounts } from '@features/articles/utils/articleCounts'
 import { mergeArticles } from '@features/articles/utils/mergeArticles'
 import { useGetTnwArticlesQuery } from '@/features/tnwBlog/api/getBlogArticles.query'
 import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'
@@ -13,8 +14,7 @@ import ButtonSkeletonLoader from '@/components/loaders/ButtonSkeletonLoader'
 export default function TnwArticleList() {
   const { data: tnwData, isPending: tnwPending } = useGetTnwArticlesQuery()
   const tnwArticles = tnwData ?? []
-  const tnwArticleCount = Math.min(tnwArticles.length, ARTICLES_LIMIT)
-  const devToLimit = ARTICLES_LIMIT - tnwArticleCount
+  const { devToLimit } = resolveArticleCounts(tnwArticles.length)
 
   const { data: devToData, isPending: devToPending } = useGetDevToArticlesQuery(
     {

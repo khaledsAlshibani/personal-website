@@ -1,27 +1,39 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import {
+  HeadContent,
+  Scripts,
+  createRootRouteWithContext,
+} from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider } from 'next-themes'
 import { getHeaderContent } from '@features/header/data/header.data'
-import { queryClient } from '@/utils/queryClient'
+import { ThemeProvider } from 'next-themes'
+import type { QueryClient } from '@tanstack/react-query'
 import { PostHogProvider } from '@/components/providers/PostHogProvider'
-import { SITE_URL } from '@/utils/url'
+import {
+  CANONICAL_URL,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  OG_IMAGE,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+  PERSON_NAME,
+  SITE_NAME,
+  buildPersonJsonLd,
+  buildWebSiteJsonLd,
+} from '@/utils/seo'
 
 import appCss from '@/styles.css?url'
 
 // import '@/i18n'
 
-const defaultTitle = 'Khaled Alshibani - Full Stack Developer'
-const defaultDescription =
-  'Full stack web developer with strong frontend foundation, production experience, and focus on performance, stability, and maintainable modern applications.'
-const ogImage = `${SITE_URL}/og.png`
-const twitterOgImage = `${SITE_URL}/twitter-og.png`
+export interface RouterContext {
+  queryClient: QueryClient
+}
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<RouterContext>()({
   loader: async () => await getHeaderContent(),
   head: () => ({
-    title: defaultTitle,
+    title: DEFAULT_TITLE,
     meta: [
       {
         charSet: 'utf-8',
@@ -31,19 +43,40 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: defaultTitle,
+        title: DEFAULT_TITLE,
       },
       {
         name: 'description',
-        content: defaultDescription,
+        content: DEFAULT_DESCRIPTION,
+      },
+      {
+        name: 'author',
+        content: PERSON_NAME,
+      },
+      {
+        name: 'robots',
+        content:
+          'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+      },
+      {
+        name: 'theme-color',
+        content: '#faf8f5',
+      },
+      {
+        property: 'og:site_name',
+        content: SITE_NAME,
+      },
+      {
+        property: 'og:locale',
+        content: 'en_US',
       },
       {
         property: 'og:title',
-        content: defaultTitle,
+        content: DEFAULT_TITLE,
       },
       {
         property: 'og:description',
-        content: defaultDescription,
+        content: DEFAULT_DESCRIPTION,
       },
       {
         property: 'og:type',
@@ -51,31 +84,51 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:url',
-        content: SITE_URL,
+        content: CANONICAL_URL,
       },
       {
         property: 'og:image',
-        content: ogImage,
+        content: OG_IMAGE,
+      },
+      {
+        property: 'og:image:width',
+        content: OG_IMAGE_WIDTH,
+      },
+      {
+        property: 'og:image:height',
+        content: OG_IMAGE_HEIGHT,
+      },
+      {
+        property: 'og:image:alt',
+        content: DEFAULT_TITLE,
       },
       {
         name: 'twitter:card',
         content: 'summary_large_image',
       },
       {
+        name: 'twitter:site',
+        content: '@khaleds_saif',
+      },
+      {
+        name: 'twitter:creator',
+        content: '@khaleds_saif',
+      },
+      {
         name: 'twitter:title',
-        content: defaultTitle,
+        content: DEFAULT_TITLE,
       },
       {
         name: 'twitter:description',
-        content: defaultDescription,
+        content: DEFAULT_DESCRIPTION,
       },
       {
         name: 'twitter:image',
-        content: twitterOgImage,
+        content: OG_IMAGE,
       },
       {
-        name: 'twitter:url',
-        content: SITE_URL,
+        name: 'twitter:image:alt',
+        content: DEFAULT_TITLE,
       },
     ],
     links: [
@@ -85,7 +138,38 @@ export const Route = createRootRoute({
       },
       {
         rel: 'canonical',
-        href: SITE_URL,
+        href: CANONICAL_URL,
+      },
+      {
+        rel: 'manifest',
+        href: '/manifest.json',
+      },
+      {
+        rel: 'icon',
+        href: '/favicon.ico',
+        sizes: 'any',
+      },
+      {
+        rel: 'apple-touch-icon',
+        href: '/apple-touch-icon.png',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://cms.technway.biz',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://media2.dev.to',
+      },
+    ],
+    scripts: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify(buildPersonJsonLd()),
+      },
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify(buildWebSiteJsonLd()),
       },
     ],
   }),
@@ -105,9 +189,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider defaultTheme="light" enableSystem={false}>
-          <QueryClientProvider client={queryClient}>
-            <PostHogProvider>
-              {children}
+          <PostHogProvider>
+            {children}
+            {import.meta.env.DEV && (
               <TanStackDevtools
                 config={{
                   position: 'bottom-right',
@@ -119,8 +203,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                   },
                 ]}
               />
-            </PostHogProvider>
-          </QueryClientProvider>
+            )}
+          </PostHogProvider>
         </ThemeProvider>
         <Scripts />
       </body>

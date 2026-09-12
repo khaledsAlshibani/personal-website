@@ -16,7 +16,17 @@ const config = defineConfig({
   },
   plugins: [
     devtools(),
-    nitro(),
+    nitro({
+      routeRules: {
+        // Caches the SSR homepage
+        '/': {
+          headers: {
+            'cache-control':
+              'public, max-age=0, must-revalidate, s-maxage=3600, stale-while-revalidate=86400',
+          },
+        },
+      },
+    }),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ['./tsconfig.json'],

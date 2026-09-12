@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import { queryOptions, useQuery } from '@tanstack/react-query'
 import { getTnwArticlesServer } from '@features/tnwBlog/api/getTnwArticles.functions'
 import { TNW_BLOG_AUTHOR_SLUG } from '@features/tnwBlog/utils/constants'
 
-export function useGetTnwArticlesQuery() {
-  return useQuery({
+export const tnwArticlesQueryOptions = () =>
+  queryOptions({
     queryKey: ['tnw-articles', TNW_BLOG_AUTHOR_SLUG],
     queryFn: () => getTnwArticlesServer(),
     staleTime: 300_000,
@@ -11,4 +11,7 @@ export function useGetTnwArticlesQuery() {
     refetchOnWindowFocus: false,
     retry: false,
   })
+
+export function useGetTnwArticlesQuery() {
+  return useQuery(tnwArticlesQueryOptions())
 }
