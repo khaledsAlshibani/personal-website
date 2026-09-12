@@ -4,6 +4,18 @@ import Title from '@/components/core/typography/Title'
 import Text from '@/components/core/typography/Text'
 
 export const Route = createFileRoute('/404')({
+  head: () => ({
+    title: 'Page not found',
+    meta: [
+      {
+        title: 'Page not found',
+      },
+      {
+        name: 'robots',
+        content: 'noindex, follow',
+      },
+    ],
+  }),
   component: RouteComponent,
 })
 

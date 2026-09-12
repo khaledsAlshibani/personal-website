@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import { queryOptions, useQuery } from '@tanstack/react-query'
 import { getGithubReposServer } from '@features/projects/api/getGHRepos.functions'
 import type { GithubRepo } from '@features/projects/types/github.types'
 
-export function useGHReposQuery() {
-  return useQuery<Array<GithubRepo>>({
+export const ghReposQueryOptions = () =>
+  queryOptions<Array<GithubRepo>>({
     queryKey: ['github-pinned-repos'],
     queryFn: () => getGithubReposServer(),
     staleTime: 300_000,
@@ -11,4 +11,7 @@ export function useGHReposQuery() {
     refetchOnWindowFocus: false,
     retry: false,
   })
+
+export function useGHReposQuery() {
+  return useQuery(ghReposQueryOptions())
 }

@@ -40,7 +40,7 @@ const iconComponents: Record<
   codepen: Codepen,
 }
 
-const defaultItems: Array<SocialMediaItem> = [
+export const socialMediaLinks: Array<SocialMediaItem> = [
   { name: 'github', url: 'https://github.com/khaledsAlshibani' },
   { name: 'linkedin', url: 'https://www.linkedin.com/in/khaledsalshibani/' },
   { name: 'x', url: 'https://x.com/khaleds_saif' },
@@ -49,7 +49,7 @@ const defaultItems: Array<SocialMediaItem> = [
 ]
 
 export default function SocialMediaList({
-  items = defaultItems,
+  items = socialMediaLinks,
   iconClassName = 'size-5',
   iconSize = 20,
   className,

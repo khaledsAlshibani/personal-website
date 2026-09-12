@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /404
+
+Sitemap: https://khaled.technway.biz/sitemap.xml
