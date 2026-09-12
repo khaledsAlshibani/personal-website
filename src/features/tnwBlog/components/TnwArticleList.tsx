@@ -2,6 +2,7 @@ import TnwArticle from '@features/tnwBlog/components/TnwArticle'
 import { ArrowRight } from 'lucide-react'
 import { TNW_BLOG_AUTHOR_URL } from '@features/tnwBlog/utils/constants'
 import { useGetDevToArticlesQuery } from '@features/dev-to/api/getDevToArticles.query'
+import { ARTICLES_LIMIT } from '@features/articles/utils/constants'
 import { mergeArticles } from '@features/articles/utils/mergeArticles'
 import { useGetTnwArticlesQuery } from '@/features/tnwBlog/api/getBlogArticles.query'
 import ArticleSkeletonLoader from '@/components/loaders/ArticleSkeletonLoader'
@@ -11,10 +12,21 @@ import ButtonSkeletonLoader from '@/components/loaders/ButtonSkeletonLoader'
 
 export default function TnwArticleList() {
   const { data: tnwData, isPending: tnwPending } = useGetTnwArticlesQuery()
-  const { data: devToData, isPending: devToPending } =
-    useGetDevToArticlesQuery()
+  const tnwArticles = tnwData ?? []
+  const tnwArticleCount = Math.min(tnwArticles.length, ARTICLES_LIMIT)
+  const devToLimit = ARTICLES_LIMIT - tnwArticleCount
 
-  const articles = mergeArticles(tnwData ?? [], devToData ?? [])
+  const { data: devToData, isPending: devToPending } = useGetDevToArticlesQuery(
+    {
+      enabled: !tnwPending && devToLimit > 0,
+      limit: devToLimit,
+    },
+  )
+
+  const articles = mergeArticles(
+    tnwArticles.slice(0, ARTICLES_LIMIT),
+    (devToData ?? []).slice(0, devToLimit),
+  )
   const isPending = articles.length === 0 && (tnwPending || devToPending)
 
   if (isPending) {

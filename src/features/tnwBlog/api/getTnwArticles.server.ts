@@ -1,9 +1,13 @@
 import request from 'graphql-request'
+import { ARTICLES_LIMIT } from '@features/articles/utils/constants'
 import type {
   TnwBlogPost,
   TnwBlogPostsResponse,
 } from '@/features/tnwBlog/types/blog.types'
-import { TNW_BLOG_AUTHOR_SLUG } from '@/features/tnwBlog/utils/constants'
+import {
+  TNW_BLOG_AUTHOR_SLUG,
+  TNW_BLOG_LANGUAGE,
+} from '@/features/tnwBlog/utils/constants'
 import {
   getTnwBlogApiHeaders,
   getTnwBlogApiPublicUrl,
@@ -14,10 +18,16 @@ import { logError } from '@/utils/logError'
 const emptyTnwArticles: Array<TnwBlogPost> = []
 
 const TnwArticlesQuery = `
-  query KhaledBlogPosts($first: Int!, $authorName: String!) {
-    posts(
+  query KhaledBlogPosts(
+    $language: String!
+    $first: Int!
+    $authorSlug: String!
+  ) {
+    technwayBlogPosts(
+      language: $language
       first: $first
-      where: { authorName: $authorName }
+      offset: 0
+      authorSlug: $authorSlug
     ) {
       nodes {
         databaseId
@@ -25,12 +35,8 @@ const TnwArticlesQuery = `
         title
         excerpt
         date
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
+        featuredImage { sourceUrl altText }
+        isPinned
       }
     }
   }
@@ -50,15 +56,16 @@ export async function fetchTnwArticles(): Promise<Array<TnwBlogPost>> {
         apiUrl,
         TnwArticlesQuery,
         {
-          first: 4,
-          authorName: TNW_BLOG_AUTHOR_SLUG,
+          language: TNW_BLOG_LANGUAGE,
+          first: ARTICLES_LIMIT,
+          authorSlug: TNW_BLOG_AUTHOR_SLUG,
         },
         getTnwBlogApiHeaders(),
       ),
       DEFAULT_FETCH_TIMEOUT_MS,
     )
 
-    return response.posts.nodes.filter(
+    return response.technwayBlogPosts.nodes.filter(
       (article): article is TnwBlogPost => article !== null,
     )
   } catch (error) {

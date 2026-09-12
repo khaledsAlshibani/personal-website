@@ -5,15 +5,14 @@ export interface TnwBlogPost {
   excerpt?: string | null
   date?: string | null
   featuredImage?: {
-    node?: {
-      sourceUrl: string
-      altText?: string | null
-    } | null
+    sourceUrl: string
+    altText?: string | null
   } | null
+  isPinned?: boolean | null
 }
 
 export interface TnwBlogPostsResponse {
-  posts: {
+  technwayBlogPosts: {
     nodes: Array<TnwBlogPost | null>
   }
 }
