@@ -148,8 +148,8 @@ importers:
         specifier: ^4.1.11
         version: 4.1.11(@opentelemetry/api@1.9.0)(@types/node@26.5.1)(jsdom@29.1.1)(vite@8.3.0(@types/node@26.5.1)(esbuild@0.27.1)(jiti@2.7.0)(tsx@4.21.0)(yaml@2.9.0))
       web-vitals:
-        specifier: ^5.3.0
-        version: 5.3.0
+        specifier: ^6.2.1
+        version: 6.2.1
 
 packages:
 
@@ -3726,9 +3726,6 @@ packages:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
     engines: {node: '>= 8'}
 
-  web-vitals@5.3.0:
-    resolution: {integrity: sha512-q6LWsLatGYZp5VGBIOvbTj6JBV2nOmC8KvWztXBmwJcfFAzhwKwbOxhUH306XY3CcaZDUlSmSuNPBsCn0bFu+g==}
-
   web-vitals@6.2.1:
     resolution: {integrity: sha512-rLcLXA2sx6+9dE88NHFubwTtGxpK4yYBLj6qHPdFoCaLr0cXGb4efOqtKLlm4loGA4OEKHIQKMKzZkKyOh5ctw==}
 
@@ -7274,8 +7271,6 @@ snapshots:
       xml-name-validator: 5.0.0
 
   web-streams-polyfill@3.3.3: {}
-
-  web-vitals@5.3.0: {}
 
   web-vitals@6.2.1: {}
 
