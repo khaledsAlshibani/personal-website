@@ -29,11 +29,3 @@ export async function fetchPage<T = any>(
 
   return (await res.json()) as Array<T>
 }
-
-export function getGHApiBaseUrl(): string {
-  return import.meta.env.VITE_GITHUB_API_BASE_URL || 'https://api.github.com'
-}
-
-export function getGHApiToken(): string {
-  return import.meta.env.VITE_GITHUB_API_TOKEN
-}

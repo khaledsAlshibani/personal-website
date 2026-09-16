@@ -1,12 +1,17 @@
+import { env } from 'node:process'
 import request from 'graphql-request'
-import {
-  DEFAULT_GH_TIMEOUT_MS,
-  getGHApiBaseUrl,
-  getGHApiToken,
-} from '@features/projects/utils/github'
+import { DEFAULT_GH_TIMEOUT_MS } from '@features/projects/utils/github'
 import type { GithubRepo } from '@features/projects/types/github.types'
 import { withTimeout } from '@/utils/fetch'
 import { logError } from '@/utils/logError'
+
+function getGithubApiBaseUrl(): string {
+  return env.GITHUB_API_BASE_URL?.trim() || 'https://api.github.com'
+}
+
+function getGithubApiToken(): string {
+  return env.GITHUB_API_TOKEN?.trim() || ''
+}
 
 const pinnedRepositoriesQuery = `
   query PinnedRepositories($first: Int!) {
@@ -84,10 +89,10 @@ function mapPinnedRepository(repo: PinnedRepository): GithubRepo {
 }
 
 export async function fetchGithubRepos(): Promise<Array<GithubRepo>> {
-  const baseUrl = getGHApiBaseUrl()
+  const baseUrl = getGithubApiBaseUrl()
 
   try {
-    const token = getGHApiToken()
+    const token = getGithubApiToken()
 
     if (!token) {
       logError('github-repos', new Error('Missing GitHub API token'))
